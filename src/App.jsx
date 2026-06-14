@@ -5,11 +5,13 @@ import ExportButton from "./components/ExportButton.jsx";
 import { generateWebsiteWithAI } from "./ai/generateWebsite.js";
 import { improveWebsiteWithAI, improvementGoalOptions } from "./ai/improveWebsite.js";
 import { industryOptions, mainGoalOptions } from "./ai/industryPresets.js";
+import { normalizeGeneratedWebsite } from "./ai/sectionNormalizer.js";
 import { toneOptions } from "./ai/tonePresets.js";
 import {
   cloneSections,
   createSection,
   duplicateSection,
+  initialSections,
   landingTemplates,
   legacyElementsToSections,
   sectionLibrary
@@ -105,10 +107,33 @@ function updateEditableInValue(value, id, updates) {
 
 function mergeSections(savedSections, templateId) {
   if (Array.isArray(savedSections)) {
-    return cloneSections(savedSections);
+    return normalizeEditorSections(savedSections, templateId);
   }
 
   return cloneSections(getTemplateSections(templateId));
+}
+
+function normalizeEditorSections(sections, templateId) {
+  const templateSections = getTemplateSections(templateId);
+  const normalizedSections = sections
+    .filter((section) => section && typeof section === "object")
+    .map((section) => {
+      const fallbackSection =
+        templateSections.find((item) => item.type === section.type) ??
+        initialSections.find((item) => item.type === section.type) ??
+        initialSections[0];
+      const normalized = normalizeGeneratedWebsite(
+        { template: templateId, designSystem: {}, sections: [section] },
+        { template: templateId, designSystem: {}, sections: cloneSections([fallbackSection]) }
+      ).sections[0];
+
+      return {
+        ...normalized,
+        id: typeof section.id === "string" && section.id.trim() ? section.id : normalized.id
+      };
+    });
+
+  return normalizedSections.length ? normalizedSections : cloneSections(templateSections);
 }
 
 function createProjectId() {

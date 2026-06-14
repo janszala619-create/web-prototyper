@@ -130,6 +130,10 @@ function LandingPage({
   function renderHero(section) {
     const { content } = section;
 
+    if (!content?.logo || !content?.navigation || !content?.title || !content?.text || !content?.button || !content?.visual) {
+      return null;
+    }
+
     return (
       <>
         <div className="hero-topbar">
@@ -183,13 +187,13 @@ function LandingPage({
   }
 
   function renderSectionBody(section) {
-    const { content } = section;
+    const { content = {} } = section;
 
     switch (section.type) {
       case "Hero":
         return renderHero(section);
       case "Features":
-        return <div className="card-grid">{content.cards.map((item) => card(item, "feature-card"))}</div>;
+        return <div className="card-grid">{(content.cards ?? []).map((item) => card(item, "feature-card"))}</div>;
       case "CTA":
         return (
           <div className="center-stack">
@@ -203,7 +207,7 @@ function LandingPage({
           <>
             {editableText(content.title, { as: "h2", className: "section-title" })}
             <div className="card-grid two-up">
-              {content.quotes.map((item) => editableText(item, { key: item.id, as: "blockquote", className: "quote-card" }))}
+              {(content.quotes ?? []).map((item) => editableText(item, { key: item.id, as: "blockquote", className: "quote-card" }))}
             </div>
           </>
         );
@@ -211,17 +215,21 @@ function LandingPage({
         return (
           <>
             {editableText(content.title, { as: "h2", className: "section-title" })}
-            <div className="card-grid">{content.plans.map((item) => card(item, "pricing-card"))}</div>
+            <div className="card-grid">{(content.plans ?? []).map((item) => card(item, "pricing-card"))}</div>
           </>
         );
       case "FAQ":
         return (
           <>
             {editableText(content.title, { as: "h2", className: "section-title" })}
-            <div className="faq-list">{content.items.map((item) => card(item, "faq-item"))}</div>
+            <div className="faq-list">{(content.items ?? []).map((item) => card(item, "faq-item"))}</div>
           </>
         );
       case "Contact":
+        if (!content.title || !content.text || !content.email || !content.button) {
+          return null;
+        }
+
         return (
           <div className="contact-grid">
             <div>
@@ -235,6 +243,10 @@ function LandingPage({
           </div>
         );
       case "Footer":
+        if (!content.text) {
+          return null;
+        }
+
         return editableText(content.text, { as: "footer", className: "landing-footer" });
       default:
         return null;
