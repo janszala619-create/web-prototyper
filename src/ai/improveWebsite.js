@@ -1,4 +1,5 @@
 import { improveWebsiteWithAI as requestImprovedWebsite } from "./aiClient.js";
+import { normalizeImprovedWebsite } from "./sectionNormalizer.js";
 import { getTonePreset, toneOptions } from "./tonePresets.js";
 
 export const improvementGoalOptions = [
@@ -271,5 +272,7 @@ export function improveWebsite(input = {}) {
 export function improveWebsiteWithAI(input) {
   // Server-side OpenAI call lives in /api/improve-website.
   // Never pass or store an API key in the Vite frontend.
-  return requestImprovedWebsite(input);
+  return requestImprovedWebsite(input).then((aiWebsite) =>
+    normalizeImprovedWebsite(aiWebsite, Array.isArray(input?.sections) ? input.sections : [])
+  );
 }

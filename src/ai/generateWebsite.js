@@ -1,6 +1,7 @@
 import { createSection } from "../data/initialElements.js";
 import { generateWebsiteWithAI as requestGeneratedWebsite } from "./aiClient.js";
 import { getGoalCta, getIndustryPreset, industryOptions, mainGoalOptions } from "./industryPresets.js";
+import { normalizeGeneratedWebsite } from "./sectionNormalizer.js";
 import { getTonePreset, toneOptions } from "./tonePresets.js";
 
 function cleanValue(value, fallback) {
@@ -327,5 +328,7 @@ export function generateWebsite(input = {}) {
 export function generateWebsiteWithAI(input) {
   // Server-side OpenAI call lives in /api/generate-website.
   // Never pass or store an API key in the Vite frontend.
-  return requestGeneratedWebsite(input);
+  return requestGeneratedWebsite(input).then((aiWebsite) =>
+    normalizeGeneratedWebsite(aiWebsite, generateWebsite(input))
+  );
 }

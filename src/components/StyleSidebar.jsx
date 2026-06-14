@@ -173,17 +173,35 @@ function safeColor(value) {
   return /^#[0-9a-f]{6}$/i.test(value) ? value : "#ffffff";
 }
 
+function safeNumber(value, fallback = 0) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    const parsed = Number.parseFloat(value);
+
+    if (Number.isFinite(parsed)) {
+      return parsed;
+    }
+  }
+
+  return fallback;
+}
+
 function RangeField({ label, min, max, value, onChange }) {
+  const numericValue = safeNumber(value);
+
   return (
     <label className="field range-field">
       <span>
-        {label} <b>{value}px</b>
+        {label} <b>{numericValue}px</b>
       </span>
       <input
         type="range"
         min={min}
         max={max}
-        value={value}
+        value={numericValue}
         onChange={(event) => onChange(Number(event.target.value))}
       />
     </label>
