@@ -15,7 +15,7 @@ async function postJson(path, payload) {
   }
 
   if (!response.ok) {
-    throw new Error(data?.error || "AI request failed.");
+    throw new Error(data?.error || "KI-Anfrage fehlgeschlagen.");
   }
 
   return data;

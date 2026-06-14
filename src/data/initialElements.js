@@ -1,11 +1,11 @@
 const sectionTypeLabels = {
   Hero: "Hero",
-  Features: "Features",
+  Features: "Vorteile",
   CTA: "CTA",
-  Testimonials: "Testimonials",
-  Pricing: "Pricing",
+  Testimonials: "Kundenstimmen",
+  Pricing: "Preise",
   FAQ: "FAQ",
-  Contact: "Contact",
+  Contact: "Kontakt",
   Footer: "Footer"
 };
 
@@ -326,7 +326,7 @@ export const initialSections = [
       padding: 30
     },
     {
-      text: textElement("footer-text", "Footer Text", "footer", "Northstar  |  Prototype ready", {
+      text: textElement("footer-text", "Footer Text", "footer", "Northstar  |  Prototyp bereit", {
         color: "#ffffff",
         fontSize: 15
       })
@@ -400,42 +400,42 @@ export const sectionLibrary = [
     type: "Hero",
     label: "Hero",
     variants: [
-      sectionVariant("Hero", "Startup Hero", "Bold launch section with product-first copy.", {
+      sectionVariant("Hero", "Startup Hero", "Mutige Launch-Section mit produktnaher Botschaft.", {
         "hero-section": { styles: { backgroundColor: "#eef6ff", padding: 78 } },
         "hero-logo": { text: "Launchpad" },
-        "hero-navigation": { text: "Product   Roadmap   Contact" },
-        "hero-title": { text: "Launch your idea before the market moves", styles: { fontSize: 56 } },
+        "hero-navigation": { text: "Produkt   Roadmap   Kontakt" },
+        "hero-title": { text: "Starte deine Idee, bevor der Markt weiterzieht", styles: { fontSize: 56 } },
         "hero-text": {
-          text: "Prototype the story, validate the offer and get a polished first page online fast."
+          text: "Prototypisiere deine Story, validiere dein Angebot und bringe schnell eine klare erste Seite online."
         },
-        "hero-button": { text: "Validate now", styles: { backgroundColor: "#0f6bff" } }
+        "hero-button": { text: "Jetzt validieren", styles: { backgroundColor: "#0f6bff" } }
       }),
-      sectionVariant("Hero", "SaaS Hero", "Clean software landing page hero.", {
+      sectionVariant("Hero", "SaaS Hero", "Klarer Hero fuer Software-Landingpages.", {
         "hero-section": { styles: { backgroundColor: "#f1f7ff", padding: 72 } },
         "hero-logo": { text: "Northstar" },
-        "hero-navigation": { text: "Features   Pricing   Demo" },
-        "hero-title": { text: "A calmer workflow for growing teams" },
+        "hero-navigation": { text: "Funktionen   Preise   Demo" },
+        "hero-title": { text: "Ein ruhigerer Workflow fuer wachsende Teams" },
         "hero-text": {
-          text: "Bring planning, reviews and launches into one visual workspace your team can actually use."
+          text: "Bringe Planung, Reviews und Launches in einen visuellen Arbeitsbereich, den dein Team wirklich nutzt."
         },
-        "hero-button": { text: "Book demo" }
+        "hero-button": { text: "Demo buchen" }
       }),
-      sectionVariant("Hero", "Agency Hero", "High-contrast hero for service teams.", {
+      sectionVariant("Hero", "Agentur Hero", "Kontrastreicher Hero fuer Service-Teams.", {
         "hero-section": {
           styles: { color: "#ffffff", backgroundColor: "#102033", padding: 76 }
         },
         "hero-logo": { text: "Signalhaus", styles: { color: "#ffffff" } },
-        "hero-navigation": { text: "Strategy   Campaigns   Cases", styles: { color: "#cbd5e1" } },
+        "hero-navigation": { text: "Strategie   Kampagnen   Cases", styles: { color: "#cbd5e1" } },
         "hero-title": {
-          text: "Campaign systems that turn attention into demand",
+          text: "Kampagnensysteme, die Aufmerksamkeit in Nachfrage verwandeln",
           styles: { color: "#ffffff", fontSize: 54 }
         },
         "hero-text": {
-          text: "Positioning, creative and landing pages built for sharper launch cycles.",
+          text: "Positionierung, Kreativkonzepte und Landingpages fuer klarere Launch-Zyklen.",
           styles: { color: "#cbd5e1" }
         },
         "hero-button": {
-          text: "Request a case study",
+          text: "Case Study anfragen",
           styles: { color: "#0f172a", backgroundColor: "#38e6b5", borderRadius: 6 }
         }
       })
@@ -443,53 +443,53 @@ export const sectionLibrary = [
   },
   {
     type: "Features",
-    label: "Features",
+    label: "Vorteile",
     variants: [
-      sectionVariant("Features", "Grid Layout", "Three balanced benefits in a simple grid.", {
+      sectionVariant("Features", "Raster Layout", "Drei ausgewogene Vorteile in einem einfachen Raster.", {
         "features-section": { styles: { backgroundColor: "#ffffff", padding: 56 } },
-        "feature-one": { text: "Plan faster\nTurn rough page ideas into editable sections." },
-        "feature-two": { text: "Edit visually\nTune copy, color and spacing directly on the canvas." },
-        "feature-three": { text: "Export cleanly\nDownload a complete offline HTML prototype." }
+        "feature-one": { text: "Schneller planen\nVerwandle grobe Seitenideen in editierbare Sections." },
+        "feature-two": { text: "Visuell bearbeiten\nPasse Texte, Farben und Abstaende direkt im Canvas an." },
+        "feature-three": { text: "Sauber exportieren\nLade einen vollstaendigen Offline-HTML-Prototyp herunter." }
       }),
-      sectionVariant("Features", "Card Layout", "Soft cards for product or service highlights.", {
+      sectionVariant("Features", "Karten Layout", "Ruhige Karten fuer Produkt- oder Service-Highlights.", {
         "features-section": { styles: { backgroundColor: "#eef2f7", padding: 62 } },
         "feature-one": { styles: { backgroundColor: "#ffffff", borderRadius: 12 } },
         "feature-two": { styles: { backgroundColor: "#ffffff", borderRadius: 12 } },
         "feature-three": { styles: { backgroundColor: "#ffffff", borderRadius: 12 } }
       }),
-      sectionVariant("Features", "Icon Layout", "Feature cards with icon-style labels in the copy.", {
+      sectionVariant("Features", "Icon Layout", "Feature-Karten mit nummerierten Labels im Text.", {
         "features-section": { styles: { backgroundColor: "#f8fafc", padding: 58 } },
-        "feature-one": { text: "01 Fast setup\nStart from structured sections instead of blank pages." },
-        "feature-two": { text: "02 Live preview\nCheck desktop, tablet and mobile while editing." },
-        "feature-three": { text: "03 Portable output\nKeep every style embedded in one HTML file." }
+        "feature-one": { text: "01 Schneller Start\nBeginne mit strukturierten Sections statt mit einer leeren Seite." },
+        "feature-two": { text: "02 Live Preview\nPruefe Desktop, Tablet und Mobile direkt beim Bearbeiten." },
+        "feature-three": { text: "03 Portabler Export\nBehalte alle Styles eingebettet in einer HTML-Datei." }
       })
     ]
   },
   {
     type: "Pricing",
-    label: "Pricing",
+    label: "Preise",
     variants: [
-      sectionVariant("Pricing", "Simple Pricing", "Single clear offer with light supporting plans.", {
-        "pricing-title": { text: "Simple pricing for fast prototypes" },
-        "pricing-one": { text: "Starter\nFree\nExplore the editor" },
-        "pricing-two": { text: "Pro\n29 EUR / Monat\nExport unlimited prototypes" },
-        "pricing-three": { text: "Team\n79 EUR / Monat\nCollaborate on landing pages" }
+      sectionVariant("Pricing", "Einfache Preise", "Ein klares Angebot mit leichten Zusatzplaenen.", {
+        "pricing-title": { text: "Einfache Preise fuer schnelle Prototypen" },
+        "pricing-one": { text: "Starter\nKostenlos\nEditor ausprobieren" },
+        "pricing-two": { text: "Pro\n29 EUR / Monat\nUnbegrenzt Prototypen exportieren" },
+        "pricing-three": { text: "Team\n79 EUR / Monat\nGemeinsam an Landingpages arbeiten" }
       }),
-      sectionVariant("Pricing", "Three Tier Pricing", "Classic three-column SaaS pricing.", {
-        "pricing-title": { text: "Choose the right workspace" },
-        "pricing-one": { text: "Basic\n19 EUR / Monat\nFor solo builders" },
+      sectionVariant("Pricing", "Drei Preisstufen", "Klassische SaaS-Preise in drei Spalten.", {
+        "pricing-title": { text: "Waehle den passenden Arbeitsbereich" },
+        "pricing-one": { text: "Basic\n19 EUR / Monat\nFuer Solo-Builder" },
         "pricing-two": {
-          text: "Growth\n59 EUR / Monat\nFor active teams",
+          text: "Growth\n59 EUR / Monat\nFuer aktive Teams",
           styles: { backgroundColor: "#f1f7ff" }
         },
-        "pricing-three": { text: "Scale\n149 EUR / Monat\nFor launch systems" }
+        "pricing-three": { text: "Scale\n149 EUR / Monat\nFuer Launch-Systeme" }
       }),
-      sectionVariant("Pricing", "Enterprise Pricing", "Enterprise-first pricing prompt.", {
-        "pricing-title": { text: "Built for larger launch teams" },
-        "pricing-one": { text: "Pilot\nCustom\nValidate one workflow" },
-        "pricing-two": { text: "Business\nCustom\nRoll out across teams" },
+      sectionVariant("Pricing", "Enterprise Preise", "Angebot fuer groessere Teams.", {
+        "pricing-title": { text: "Gebaut fuer groessere Launch-Teams" },
+        "pricing-one": { text: "Pilot\nIndividuell\nEinen Workflow validieren" },
+        "pricing-two": { text: "Business\nIndividuell\nIn Teams ausrollen" },
         "pricing-three": {
-          text: "Enterprise\nCustom\nSecurity, support and onboarding",
+          text: "Enterprise\nIndividuell\nSecurity, Support und Onboarding",
           styles: { backgroundColor: "#dcfce7" }
         }
       })
@@ -497,24 +497,24 @@ export const sectionLibrary = [
   },
   {
     type: "Testimonials",
-    label: "Testimonials",
+    label: "Kundenstimmen",
     variants: [
-      sectionVariant("Testimonials", "Customer Quotes", "Two concise customer proof points.", {
-        "testimonials-title": { text: "Teams ship clearer pages" },
-        "testimonial-one": { text: "We moved from vague wireframes to a page everyone could react to." },
-        "testimonial-two": { text: "The export gave our developer a clean handoff in one click." }
+      sectionVariant("Testimonials", "Kundenstimmen", "Zwei kurze Vertrauensbeweise von Kunden.", {
+        "testimonials-title": { text: "Teams veroeffentlichen klarere Seiten" },
+        "testimonial-one": { text: "Wir kamen von vagen Wireframes zu einer Seite, auf die alle reagieren konnten." },
+        "testimonial-two": { text: "Der Export gab unserem Entwickler eine saubere Uebergabe mit einem Klick." }
       }),
-      sectionVariant("Testimonials", "Founder Quotes", "Founder-style social proof.", {
+      sectionVariant("Testimonials", "Founder Stimmen", "Social Proof aus Gruenderperspektive.", {
         "testimonials-section": { styles: { backgroundColor: "#fff7ed" } },
-        "testimonials-title": { text: "Built for early decisions" },
-        "testimonial-one": { text: "It helped us pressure-test positioning before writing production code." },
-        "testimonial-two": { text: "We finally had a prototype that looked real enough to discuss." }
+        "testimonials-title": { text: "Gebaut fuer fruehe Entscheidungen" },
+        "testimonial-one": { text: "Wir konnten die Positionierung pruefen, bevor Produktionscode entstand." },
+        "testimonial-two": { text: "Endlich hatten wir einen Prototyp, der echt genug fuer Diskussionen wirkte." }
       }),
-      sectionVariant("Testimonials", "Team Feedback", "Internal team feedback block.", {
+      sectionVariant("Testimonials", "Team Feedback", "Block fuer internes Team-Feedback.", {
         "testimonials-section": { styles: { backgroundColor: "#eef6f4" } },
-        "testimonials-title": { text: "Feedback from the launch team" },
-        "testimonial-one": { text: "Marketing could update copy without waiting on design." },
-        "testimonial-two": { text: "Product could compare variants across breakpoints instantly." }
+        "testimonials-title": { text: "Feedback aus dem Launch-Team" },
+        "testimonial-one": { text: "Marketing konnte Texte aktualisieren, ohne auf Design warten zu muessen." },
+        "testimonial-two": { text: "Product konnte Varianten ueber Breakpoints hinweg sofort vergleichen." }
       })
     ]
   },
@@ -522,20 +522,20 @@ export const sectionLibrary = [
     type: "FAQ",
     label: "FAQ",
     variants: [
-      sectionVariant("FAQ", "Product FAQ", "General product questions.", {
-        "faq-title": { text: "Product FAQ" },
-        "faq-one": { text: "Can I edit every section?\nYes, section content and core styles stay editable." },
-        "faq-two": { text: "Does export need a server?\nNo, the HTML file works offline." }
+      sectionVariant("FAQ", "Produkt FAQ", "Allgemeine Produktfragen.", {
+        "faq-title": { text: "Produkt FAQ" },
+        "faq-one": { text: "Kann ich jede Section bearbeiten?\nJa, Inhalte und Kern-Styles bleiben editierbar." },
+        "faq-two": { text: "Braucht der Export einen Server?\nNein, die HTML-Datei funktioniert offline." }
       }),
-      sectionVariant("FAQ", "Launch FAQ", "Questions for launch-page buyers.", {
-        "faq-title": { text: "Launch questions" },
-        "faq-one": { text: "Can I switch templates?\nYes, templates remain available from the toolbar." },
-        "faq-two": { text: "Can I reorder sections?\nYes, every section includes move controls." }
+      sectionVariant("FAQ", "Launch FAQ", "Fragen fuer Launch-Seiten.", {
+        "faq-title": { text: "Fragen zum Launch" },
+        "faq-one": { text: "Kann ich Templates wechseln?\nJa, Templates bleiben in der Toolbar verfuegbar." },
+        "faq-two": { text: "Kann ich Sections neu sortieren?\nJa, jede Section enthaelt Steuerelemente zum Verschieben." }
       }),
-      sectionVariant("FAQ", "Support FAQ", "Support and handoff questions.", {
+      sectionVariant("FAQ", "Support FAQ", "Fragen zu Support und Uebergabe.", {
         "faq-title": { text: "Support FAQ" },
-        "faq-one": { text: "Is my work saved?\nYes, the editor persists state in localStorage." },
-        "faq-two": { text: "Can developers use the export?\nYes, styles and markup are embedded in one file." }
+        "faq-one": { text: "Wird meine Arbeit gespeichert?\nJa, der Editor speichert den Stand im Browser." },
+        "faq-two": { text: "Koennen Entwickler den Export nutzen?\nJa, Styles und Markup sind in einer Datei eingebettet." }
       })
     ]
   },
@@ -543,48 +543,48 @@ export const sectionLibrary = [
     type: "CTA",
     label: "CTA",
     variants: [
-      sectionVariant("CTA", "Demo CTA", "Centered call to book a demo.", {
-        "cta-title": { text: "See the prototype in action" },
-        "cta-text": { text: "Create a polished page draft and share it before the next meeting." },
-        "cta-button": { text: "Book demo" }
+      sectionVariant("CTA", "Demo CTA", "Zentrierter Aufruf zur Demo-Buchung.", {
+        "cta-title": { text: "Sieh den Prototyp in Aktion" },
+        "cta-text": { text: "Erstelle einen klaren Seitenentwurf und teile ihn vor dem naechsten Meeting." },
+        "cta-button": { text: "Demo buchen" }
       }),
-      sectionVariant("CTA", "Download CTA", "Export-focused CTA.", {
+      sectionVariant("CTA", "Download CTA", "Export-fokussierter CTA.", {
         "cta-section": { styles: { backgroundColor: "#0f172a" } },
-        "cta-title": { text: "Export a clean offline prototype" },
-        "cta-text": { text: "Keep the current page as a standalone HTML file with embedded CSS." },
-        "cta-button": { text: "Export now" }
+        "cta-title": { text: "Exportiere einen sauberen Offline-Prototyp" },
+        "cta-text": { text: "Speichere die aktuelle Seite als eigenstaendige HTML-Datei mit eingebettetem CSS." },
+        "cta-button": { text: "Jetzt exportieren" }
       }),
-      sectionVariant("CTA", "Contact CTA", "Service-oriented CTA.", {
+      sectionVariant("CTA", "Kontakt CTA", "Service-orientierter CTA.", {
         "cta-section": { styles: { backgroundColor: "#211a16" } },
-        "cta-title": { text: "Need a sharper landing page?" },
-        "cta-text": { text: "Start with a visual prototype and refine the offer from there." },
-        "cta-button": { text: "Start a project" }
+        "cta-title": { text: "Brauchst du eine schaerfere Landingpage?" },
+        "cta-text": { text: "Starte mit einem visuellen Prototyp und schaerfe dein Angebot von dort aus." },
+        "cta-button": { text: "Projekt starten" }
       })
     ]
   },
   {
     type: "Contact",
-    label: "Contact",
+    label: "Kontakt",
     variants: [
-      sectionVariant("Contact", "Simple Contact", "Basic contact block with email.", {
-        "contact-title": { text: "Get in touch" },
-        "contact-text": { text: "Send a note and we will respond with next steps." },
+      sectionVariant("Contact", "Einfacher Kontakt", "Kontaktblock mit E-Mail.", {
+        "contact-title": { text: "Kontakt aufnehmen" },
+        "contact-text": { text: "Sende eine Nachricht und wir melden uns mit den naechsten Schritten." },
         "contact-email": { text: "hello@example.com" },
-        "contact-button": { text: "Contact us" }
+        "contact-button": { text: "Kontakt aufnehmen" }
       }),
-      sectionVariant("Contact", "Agency Contact", "Dark agency contact prompt.", {
+      sectionVariant("Contact", "Agentur Kontakt", "Dunkler Kontaktblock fuer Agenturen.", {
         "contact-section": { styles: { backgroundColor: "#0f172a" } },
-        "contact-title": { text: "Plan your next campaign" },
-        "contact-text": { text: "Tell us what you are launching and where the page needs to perform." },
+        "contact-title": { text: "Plane deine naechste Kampagne" },
+        "contact-text": { text: "Erzaehle uns, was du launchst und wo die Seite leisten muss." },
         "contact-email": { text: "studio@agency.example" },
-        "contact-button": { text: "Send brief" }
+        "contact-button": { text: "Briefing senden" }
       }),
-      sectionVariant("Contact", "Sales Contact", "Sales-oriented contact handoff.", {
+      sectionVariant("Contact", "Sales Kontakt", "Kontaktblock fuer Sales-Gespraeche.", {
         "contact-section": { styles: { backgroundColor: "#102033" } },
-        "contact-title": { text: "Talk to sales" },
-        "contact-text": { text: "For teams that need onboarding, support and repeatable launch workflows." },
+        "contact-title": { text: "Mit Sales sprechen" },
+        "contact-text": { text: "Fuer Teams, die Onboarding, Support und wiederholbare Launch-Workflows brauchen." },
         "contact-email": { text: "sales@example.com" },
-        "contact-button": { text: "Request pricing" }
+        "contact-button": { text: "Preise anfragen" }
       })
     ]
   }
@@ -753,7 +753,7 @@ export const landingTemplates = {
   },
   agency: {
     id: "agency",
-    label: "Agency",
+    label: "Agentur",
     sections: createTemplate(initialSections, {
       "hero-section": { styles: { color: "#ffffff", backgroundColor: "#102033", padding: 76 } },
       "hero-logo": { text: "Signalhaus", styles: { color: "#ffffff", fontSize: 23 } },
@@ -773,7 +773,7 @@ export const landingTemplates = {
         text: "Case Study anfragen",
         styles: { color: "#0f172a", backgroundColor: "#38e6b5", borderRadius: 6 }
       },
-      "features-section": { label: "Agency Services", styles: { backgroundColor: "#eef2f7", padding: 58 } },
+      "features-section": { label: "Agentur Services", styles: { backgroundColor: "#eef2f7", padding: 58 } },
       "feature-one": {
         label: "Service 1",
         text: "Positionierung\nMessaging, Angebote und Funnel-Strategie aus einem Guss.",

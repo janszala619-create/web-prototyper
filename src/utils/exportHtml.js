@@ -304,7 +304,7 @@ function cardMarkup(element, className) {
 function renderHero(section) {
   const { content } = section;
   const visualMarkup = content.visual.image?.src
-    ? `<img class="hero-visual-image" src="${escapeHtml(content.visual.image.src)}" alt="${escapeHtml(content.visual.image.alt || "Hero visual")}" />`
+    ? `<img class="hero-visual-image" src="${escapeHtml(content.visual.image.src)}" alt="${escapeHtml(content.visual.image.alt || "Hero-Bild")}" />`
     : `<div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
       <div class="visual-grid">
         <div class="visual-row"></div>

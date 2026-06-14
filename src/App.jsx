@@ -23,6 +23,37 @@ const LAST_PROJECT_STORAGE_KEY = "web-prototyper-last-project-id";
 const defaultSelectedId = "hero-title";
 const defaultTemplateId = "saas";
 const previewModes = ["desktop", "tablet", "mobile"];
+const industryLabels = {
+  SaaS: "SaaS",
+  Agency: "Agentur",
+  "E-Commerce": "E-Commerce",
+  Portfolio: "Portfolio",
+  Restaurant: "Restaurant",
+  Other: "Sonstiges"
+};
+const toneLabels = {
+  Modern: "Modern",
+  Professional: "Professionell",
+  Friendly: "Freundlich",
+  Luxury: "Luxus",
+  Startup: "Startup"
+};
+const mainGoalLabels = {
+  "Get leads": "Leads gewinnen",
+  "Sell product": "Produkt verkaufen",
+  "Book appointments": "Termine buchen",
+  "Build trust": "Vertrauen aufbauen",
+  "Showcase work": "Arbeiten zeigen"
+};
+const improvementGoalLabels = {
+  "Make more professional": "Professioneller machen",
+  "Make more modern": "Moderner machen",
+  "Improve conversion": "Conversion verbessern",
+  "Shorten text": "Texte kuerzen",
+  "Make copy clearer": "Texte klarer machen",
+  "Make it more premium": "Premium-Wirkung staerken",
+  "Improve CTA": "Call-to-Action verbessern"
+};
 
 function getTemplateSections(templateId) {
   return landingTemplates[templateId]?.sections ?? landingTemplates[defaultTemplateId].sections;
@@ -219,7 +250,7 @@ function App() {
   const { sections, selectedId, templateId } = history.present;
 
   const activeProject = projects.find((project) => project.id === currentProjectId);
-  const currentProjectName = activeProject?.name ?? "Untitled Project";
+  const currentProjectName = activeProject?.name ?? "Unbenanntes Projekt";
   const hasUnsavedChanges = activeProject
     ? stateSignature(templateId, sections) !==
       stateSignature(activeProject.template, activeProject.sections)
@@ -473,7 +504,7 @@ function App() {
   }
 
   async function generateWebsiteFromInput(generatorInput) {
-    const shouldReplace = window.confirm("Current website will be replaced. Continue?");
+    const shouldReplace = window.confirm("Die aktuelle Website wird ersetzt. Fortfahren?");
 
     if (!shouldReplace) {
       return;
@@ -497,11 +528,13 @@ function App() {
       showToast(
         generatedWebsite.designSystem?.aiFallbackUsed
           ? "Website lokal generiert, weil die AI-Antwort nicht nutzbar war."
-          : `AI website generated: ${generatedWebsite.designSystem?.industry ?? "Website"}`,
+          : `KI-Website generiert: ${
+              industryLabels[generatedWebsite.designSystem?.industry] ?? "Website"
+            }`,
         generatedWebsite.designSystem?.aiFallbackUsed ? "error" : "success"
       );
     } catch (error) {
-      showToast(error.message || "AI website generation failed.", "error");
+      showToast(error.message || "KI-Website konnte nicht generiert werden.", "error");
     } finally {
       setIsAiWorking(false);
     }
@@ -527,13 +560,15 @@ function App() {
       showToast(
         improvedWebsite.designSystemSuggestions?.aiFallbackUsed
           ? "Website lokal verbessert, weil die AI-Antwort nicht nutzbar war."
-          : `AI improvements applied: ${
-              improvedWebsite.designSystemSuggestions?.improvementGoal ?? "Make copy clearer"
+          : `KI-Verbesserungen angewendet: ${
+              improvementGoalLabels[
+                improvedWebsite.designSystemSuggestions?.improvementGoal
+              ] ?? "Texte klarer machen"
             }`,
         improvedWebsite.designSystemSuggestions?.aiFallbackUsed ? "error" : "success"
       );
     } catch (error) {
-      showToast(error.message || "AI improvement failed.", "error");
+      showToast(error.message || "KI-Website konnte nicht verbessert werden.", "error");
     } finally {
       setIsAiWorking(false);
     }
@@ -552,7 +587,7 @@ function App() {
     const sectionsForProject = cloneSections(getTemplateSections(defaultTemplateId));
     const project = {
       id: createProjectId(),
-      name: `Untitled Project ${projects.length + 1}`,
+      name: `Unbenanntes Projekt ${projects.length + 1}`,
       createdAt: now,
       updatedAt: now,
       template: defaultTemplateId,
@@ -575,7 +610,7 @@ function App() {
     if (!currentProjectId) {
       const project = {
         id: createProjectId(),
-        name: "Untitled Project",
+        name: "Unbenanntes Projekt",
         createdAt: now,
         updatedAt: now,
         template: templateId,
@@ -826,7 +861,7 @@ function App() {
     <div className="app-shell">
       <header className="app-toolbar">
         <div>
-          <p className="app-kicker">Visual Builder</p>
+          <p className="app-kicker">Visueller Builder</p>
           <h1>Web-Prototyper</h1>
           {hasUnsavedChanges ? <span className="dirty-indicator">Ungespeichert</span> : null}
         </div>
@@ -848,21 +883,21 @@ function App() {
             type="button"
             onClick={() => setIsSectionLibraryOpen(true)}
           >
-          Add Section
+          Section hinzufuegen
         </button>
         <button
           className="history-button"
           type="button"
           onClick={() => setIsProjectsOpen(true)}
         >
-          Projects
+          Projekte
         </button>
         <button
           className="history-button"
           type="button"
           onClick={() => setIsGeneratorOpen(true)}
         >
-          AI Generate Website
+          KI-Website generieren
         </button>
         <button
           className="history-button"
@@ -870,7 +905,7 @@ function App() {
           onClick={() => setIsImproveOpen(true)}
           disabled={!sections.length}
         >
-          AI Improve Website
+          KI-Website verbessern
         </button>
         <div className="viewport-switch" aria-label="Preview Breite">
           {previewModes.map((mode) => (
@@ -892,7 +927,7 @@ function App() {
             onClick={undo}
             disabled={!canUndo}
           >
-            Undo
+            Rueckgaengig
           </button>
           <button
             className="history-button"
@@ -900,7 +935,7 @@ function App() {
             onClick={redo}
             disabled={!canRedo}
           >
-            Redo
+            Wiederholen
           </button>
           <button
             className="reset-button"
@@ -920,7 +955,7 @@ function App() {
       </header>
 
       <main className="editor-layout">
-        <section className="preview-area" aria-label="Live Preview">
+        <section className="preview-area" aria-label="Live-Vorschau">
           <div className={`preview-frame preview-frame-${previewMode}`}>
             <LandingPage
               sections={sections}
@@ -989,7 +1024,7 @@ function ToastViewport({ toasts, onDismiss }) {
         <div className={`toast toast-${toast.type}`} key={toast.id}>
           <span>{toast.message}</span>
           <button type="button" onClick={() => onDismiss(toast.id)} aria-label="Toast schliessen">
-            Close
+            Schliessen
           </button>
         </div>
       ))}
@@ -1001,8 +1036,8 @@ function AiGenerateWebsiteModal({ isWorking, onClose, onGenerate }) {
   const [formData, setFormData] = useState({
     businessName: "InvoiceFlow",
     industry: "SaaS",
-    audience: "Freelancers",
-    description: "AI bookkeeping software",
+    audience: "Freelancer",
+    description: "KI-Buchhaltungssoftware",
     tone: "Modern",
     mainGoal: "Get leads"
   });
@@ -1032,11 +1067,11 @@ function AiGenerateWebsiteModal({ isWorking, onClose, onGenerate }) {
       >
         <div className="modal-header">
           <div>
-            <p className="app-kicker">AI Generator</p>
-            <h2 id="generator-title">AI Generate Website</h2>
+            <p className="app-kicker">KI-Generator</p>
+            <h2 id="generator-title">KI-Website generieren</h2>
           </div>
           <button className="modal-close" type="button" onClick={onClose} disabled={isWorking}>
-            Close
+            Schliessen
           </button>
         </div>
 
@@ -1048,7 +1083,7 @@ function AiGenerateWebsiteModal({ isWorking, onClose, onGenerate }) {
           }}
         >
           <label className="field">
-            Business Name
+            Unternehmensname
             <input
               type="text"
               value={formData.businessName}
@@ -1056,20 +1091,20 @@ function AiGenerateWebsiteModal({ isWorking, onClose, onGenerate }) {
             />
           </label>
           <label className="field">
-            Industry
+            Branche
             <select
               value={formData.industry}
               onChange={(event) => updateField("industry", event.target.value)}
             >
               {industryOptions.map((industry) => (
                 <option key={industry} value={industry}>
-                  {industry}
+                  {industryLabels[industry] ?? industry}
                 </option>
               ))}
             </select>
           </label>
           <label className="field">
-            Target Audience
+            Zielgruppe
             <input
               type="text"
               value={formData.audience}
@@ -1077,34 +1112,34 @@ function AiGenerateWebsiteModal({ isWorking, onClose, onGenerate }) {
             />
           </label>
           <label className="field">
-            Product/Service Description
+            Produkt-/Servicebeschreibung
             <textarea
               value={formData.description}
               onChange={(event) => updateField("description", event.target.value)}
             />
           </label>
           <label className="field">
-            Tone
+            Tonalitaet
             <select
               value={formData.tone}
               onChange={(event) => updateField("tone", event.target.value)}
             >
               {toneOptions.map((tone) => (
                 <option key={tone} value={tone}>
-                  {tone}
+                  {toneLabels[tone] ?? tone}
                 </option>
               ))}
             </select>
           </label>
           <label className="field">
-            Main Goal
+            Hauptziel
             <select
               value={formData.mainGoal}
               onChange={(event) => updateField("mainGoal", event.target.value)}
             >
               {mainGoalOptions.map((goal) => (
                 <option key={goal} value={goal}>
-                  {goal}
+                  {mainGoalLabels[goal] ?? goal}
                 </option>
               ))}
             </select>
@@ -1112,10 +1147,10 @@ function AiGenerateWebsiteModal({ isWorking, onClose, onGenerate }) {
 
           <div className="generator-actions">
             <button className="reset-button" type="button" onClick={onClose} disabled={isWorking}>
-              Cancel
+              Abbrechen
             </button>
             <button className="export-button" type="submit" disabled={isWorking}>
-              {isWorking ? "Generating..." : "AI Generate Website"}
+              {isWorking ? "Wird generiert..." : "KI-Website generieren"}
             </button>
           </div>
         </form>
@@ -1156,11 +1191,11 @@ function AiImproveWebsiteModal({ isWorking, onClose, onImprove }) {
       >
         <div className="modal-header">
           <div>
-            <p className="app-kicker">AI Assistant</p>
-            <h2 id="improve-title">AI Improve Website</h2>
+            <p className="app-kicker">KI-Assistent</p>
+            <h2 id="improve-title">KI-Website verbessern</h2>
           </div>
           <button className="modal-close" type="button" onClick={onClose} disabled={isWorking}>
-            Close
+            Schliessen
           </button>
         </div>
 
@@ -1172,46 +1207,46 @@ function AiImproveWebsiteModal({ isWorking, onClose, onImprove }) {
           }}
         >
           <label className="field">
-            Improvement Goal
+            Verbesserungsziel
             <select
               value={formData.improvementGoal}
               onChange={(event) => updateField("improvementGoal", event.target.value)}
             >
               {improvementGoalOptions.map((goal) => (
                 <option key={goal} value={goal}>
-                  {goal}
+                  {improvementGoalLabels[goal] ?? goal}
                 </option>
               ))}
             </select>
           </label>
           <label className="field">
-            Tone
+            Tonalitaet
             <select
               value={formData.tone}
               onChange={(event) => updateField("tone", event.target.value)}
             >
               {toneOptions.map((tone) => (
                 <option key={tone} value={tone}>
-                  {tone}
+                  {toneLabels[tone] ?? tone}
                 </option>
               ))}
             </select>
           </label>
           <label className="field">
-            Additional Instructions
+            Zusaetzliche Hinweise
             <textarea
               value={formData.additionalInstructions}
               onChange={(event) => updateField("additionalInstructions", event.target.value)}
-              placeholder="Make the hero more direct, simplify pricing copy, strengthen the final CTA."
+              placeholder="Hero direkter machen, Preistexte vereinfachen, finalen CTA staerken."
             />
           </label>
 
           <div className="generator-actions">
             <button className="reset-button" type="button" onClick={onClose} disabled={isWorking}>
-              Cancel
+              Abbrechen
             </button>
             <button className="export-button" type="submit" disabled={isWorking}>
-              {isWorking ? "Improving..." : "AI Improve Website"}
+              {isWorking ? "Wird verbessert..." : "KI-Website verbessern"}
             </button>
           </div>
         </form>
@@ -1263,30 +1298,30 @@ function ProjectsModal({
       >
         <div className="modal-header">
           <div>
-            <p className="app-kicker">Project Manager</p>
-            <h2 id="projects-title">Projects</h2>
+            <p className="app-kicker">Projektverwaltung</p>
+            <h2 id="projects-title">Projekte</h2>
           </div>
           <button className="modal-close" type="button" onClick={onClose}>
-            Close
+            Schliessen
           </button>
         </div>
 
         <div className="projects-toolbar">
           <label className="field">
-            Search
+            Suche
             <input
               type="search"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search projects"
+              placeholder="Projekte suchen"
             />
           </label>
           <div className="projects-toolbar-actions">
             <button className="history-button" type="button" onClick={onCreateProject}>
-              Create Project
+              Projekt erstellen
             </button>
             <button className="export-button" type="button" onClick={onSaveProject}>
-              Save Project
+              Projekt speichern
             </button>
           </div>
         </div>
@@ -1294,13 +1329,13 @@ function ProjectsModal({
         <div className="project-list">
           {projects.length === 0 ? (
             <div className="empty-projects">
-              <strong>No projects yet.</strong>
-              <span>Create a project or save the current page to start.</span>
+              <strong>Noch keine Projekte.</strong>
+              <span>Erstelle ein Projekt oder speichere die aktuelle Seite.</span>
             </div>
           ) : filteredProjects.length === 0 ? (
             <div className="empty-projects">
-              <strong>No matching projects.</strong>
-              <span>Try a different search term.</span>
+              <strong>Keine passenden Projekte.</strong>
+              <span>Versuche einen anderen Suchbegriff.</span>
             </div>
           ) : (
             filteredProjects.map((project) => (
@@ -1312,7 +1347,7 @@ function ProjectsModal({
               >
                 <div className="project-main">
                   <input
-                    aria-label="Project name"
+                    aria-label="Projektname"
                     value={renameValues[project.id] ?? project.name}
                     onChange={(event) => updateRenameValue(project.id, event.target.value)}
                     onBlur={() =>
@@ -1320,8 +1355,8 @@ function ProjectsModal({
                     }
                   />
                   <small>
-                    Updated {new Date(project.updatedAt).toLocaleDateString()} ·{" "}
-                    {project.sections.length} sections
+                    Aktualisiert am {new Date(project.updatedAt).toLocaleDateString()} ·{" "}
+                    {project.sections.length} Sections
                   </small>
                 </div>
                 <div className="project-actions">
@@ -1333,7 +1368,7 @@ function ProjectsModal({
                     }
                     disabled={!String(renameValues[project.id] ?? project.name).trim()}
                   >
-                    Rename
+                    Umbenennen
                   </button>
                   <button
                     className="history-button"
@@ -1341,14 +1376,14 @@ function ProjectsModal({
                     onClick={() => onLoadProject(project.id)}
                     disabled={project.id === currentProjectId}
                   >
-                    Load
+                    Laden
                   </button>
                   <button
                     className="reset-button"
                     type="button"
                     onClick={() => onDeleteProject(project.id)}
                   >
-                    Delete Project
+                    Projekt loeschen
                   </button>
                 </div>
               </article>
@@ -1387,11 +1422,11 @@ function SectionLibraryModal({
       >
         <div className="modal-header">
           <div>
-            <p className="app-kicker">Section Library</p>
-            <h2 id="section-library-title">Add Section</h2>
+            <p className="app-kicker">Section-Bibliothek</p>
+            <h2 id="section-library-title">Section hinzufuegen</h2>
           </div>
           <button className="modal-close" type="button" onClick={onClose}>
-            Close
+            Schliessen
           </button>
         </div>
 

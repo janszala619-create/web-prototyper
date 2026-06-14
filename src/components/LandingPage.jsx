@@ -88,7 +88,7 @@ function LandingPage({
           <p className="app-kicker">Keine Sections</p>
           <h2>Starte mit einer Section aus der Library.</h2>
           <button className="export-button" type="button" onClick={onAddSectionClick}>
-            Add Section
+            Section hinzufuegen
           </button>
         </div>
       </div>
@@ -167,7 +167,7 @@ function LandingPage({
               <img
                 className="hero-visual-image"
                 src={content.visual.image.src}
-                alt={content.visual.image.alt || "Hero visual"}
+                alt={content.visual.image.alt || "Hero-Bild"}
               />
             ) : (
               <>
@@ -297,7 +297,7 @@ function LandingPage({
 
       <DragOverlay>
         {activeDragSection ? (
-          <div className="drag-overlay">{activeDragSection.type} Section</div>
+          <div className="drag-overlay">{activeDragSection.label ?? activeDragSection.type} Section</div>
         ) : null}
       </DragOverlay>
     </DndContext>
@@ -346,31 +346,31 @@ function SortableSectionFrame({
           ref={setActivatorNodeRef}
           className="drag-handle"
           type="button"
-          aria-label={`${section.type} Section ziehen`}
+          aria-label={`${section.label ?? section.type} Section ziehen`}
           {...attributes}
           {...listeners}
         >
-          Drag
+          Ziehen
         </button>
         <button type="button" onClick={() => onDuplicateSection(section.id)}>
-          Duplicate
+          Duplizieren
         </button>
         <button type="button" onClick={() => onDeleteSection(section.id)}>
-          Delete
+          Loeschen
         </button>
         <button
           type="button"
           onClick={() => onMoveSection(section.id, -1)}
           disabled={index === 0}
         >
-          Move Up
+          Nach oben
         </button>
         <button
           type="button"
           onClick={() => onMoveSection(section.id, 1)}
           disabled={index === sectionCount - 1}
         >
-          Move Down
+          Nach unten
         </button>
       </div>
       <EditableElement

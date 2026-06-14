@@ -72,24 +72,24 @@ function sectionWithStyle(section, styles = {}, content = {}) {
 
 function getPrimaryAction(goal) {
   if (goal === "Improve CTA") {
-    return "Get Started Today";
+    return "Heute starten";
   }
 
   if (goal === "Improve conversion") {
-    return "Start Now";
+    return "Jetzt starten";
   }
 
   if (goal === "Make it more premium") {
-    return "Request a Private Consultation";
+    return "Persoenliche Beratung anfragen";
   }
 
-  return "Get Started";
+  return "Loslegen";
 }
 
 function improveLineCard(element, goal, index) {
   const { title, body } = splitLines(element.text);
-  const baseTitle = title || `Benefit ${index + 1}`;
-  const baseBody = body || "Clear value for visitors who need a confident next step.";
+  const baseTitle = title || `Vorteil ${index + 1}`;
+  const baseBody = body || "Klarer Nutzen fuer Besucher, die einen sicheren naechsten Schritt brauchen.";
 
   if (goal === "Shorten text") {
     return textWithStyle(element, `${shorten(baseTitle, 34)}\n${shorten(baseBody, 96)}`);
@@ -98,43 +98,43 @@ function improveLineCard(element, goal, index) {
   if (goal === "Make it more premium") {
     return textWithStyle(
       element,
-      `${baseTitle.replace(/^AI /, "")}\nA refined experience built for clients who value clarity, quality and expert execution.`
+      `${baseTitle.replace(/^AI /, "")}\nEin hochwertiges Erlebnis fuer Kunden, die Klarheit, Qualitaet und praezise Umsetzung schaetzen.`
     );
   }
 
   if (goal === "Improve conversion") {
     return textWithStyle(
       element,
-      `${baseTitle}\nA clear benefit, fewer doubts and a stronger reason to take the next step.`
+      `${baseTitle}\nEin klarer Nutzen, weniger Zweifel und ein staerkerer Grund fuer den naechsten Schritt.`
     );
   }
 
   return textWithStyle(
     element,
-    `${baseTitle}\n${shorten(baseBody, 130)} Clear, useful and easy to understand.`
+    `${baseTitle}\n${shorten(baseBody, 130)} Klar, nuetzlich und leicht verstaendlich.`
   );
 }
 
 function improveQuote(element, goal, index) {
   const names = ["Maya Chen", "Jonas Weber", "Amara Brooks"];
-  const roles = ["Founder", "Operations Lead", "Customer"];
+  const roles = ["Gruenderin", "Operations Lead", "Kunde"];
 
   if (goal === "Shorten text") {
-    return textWithStyle(element, `"Clear, fast and easy to act on."\n- ${names[index] ?? "Customer"}, ${roles[index] ?? "Customer"}`);
+    return textWithStyle(element, `"Klar, schnell und leicht umzusetzen."\n- ${names[index] ?? "Kunde"}, ${roles[index] ?? "Kunde"}`);
   }
 
   return textWithStyle(
     element,
-    `"The page made the value obvious and gave us confidence to take the next step."\n- ${names[index] ?? "Customer"}, ${roles[index] ?? "Customer"}`
+    `"Die Seite machte den Nutzen sofort sichtbar und gab uns Sicherheit fuer den naechsten Schritt."\n- ${names[index] ?? "Kunde"}, ${roles[index] ?? "Kunde"}`
   );
 }
 
 function improveFaq(element, goal, index) {
   const faqs = [
-    ["Who is this for?", "It is built for visitors who need a clear offer, strong proof and an easy next step."],
-    ["How quickly can I start?", "The first step is simple: choose the action on this page and follow the guided path."],
-    ["What makes this different?", "The message is focused on practical outcomes instead of vague promises."],
-    ["Can this page change later?", "Yes, every section remains editable in the builder."]
+    ["Fuer wen ist das gedacht?", "Es ist fuer Besucher gemacht, die ein klares Angebot, starke Beweise und einen einfachen naechsten Schritt brauchen."],
+    ["Wie schnell kann ich starten?", "Der erste Schritt ist einfach: Waehle die Aktion auf dieser Seite und folge dem klaren Weg."],
+    ["Was macht das anders?", "Die Botschaft konzentriert sich auf praktische Ergebnisse statt auf vage Versprechen."],
+    ["Kann diese Seite spaeter geaendert werden?", "Ja, jede Section bleibt im Builder editierbar."]
   ];
   const [question, answer] = faqs[index % faqs.length];
 
@@ -163,7 +163,7 @@ function improveSection(section, options, tonePreset) {
           section.content.title,
           goal === "Shorten text"
             ? shorten(section.content.title.text, 58)
-            : `${section.content.title.text.replace(/[.!?]+$/, "")}, made clearer`,
+            : `${section.content.title.text.replace(/[.!?]+$/, "")}, klarer formuliert`,
           {
             color: goal === "Make it more premium" ? "#fffaf3" : tonePreset.text,
             fontSize: tonePreset.heroFontSize
@@ -173,7 +173,7 @@ function improveSection(section, options, tonePreset) {
           section.content.text,
           goal === "Shorten text"
             ? shorten(section.content.text.text, 120)
-            : "A sharper message, clearer proof and a stronger path from interest to action.",
+            : "Eine schaerfere Botschaft, klarere Beweise und ein staerkerer Weg von Interesse zu Handlung.",
           {
             color: goal === "Make it more premium" ? "#d8c7a1" : tonePreset.softText,
             fontSize: 19
@@ -191,19 +191,19 @@ function improveSection(section, options, tonePreset) {
       });
     case "Testimonials":
       return sectionWithStyle(section, sectionStyles, {
-        title: textWithStyle(section.content.title, "Proof that makes the decision easier", {
+        title: textWithStyle(section.content.title, "Beweise, die die Entscheidung leichter machen", {
           color: tonePreset.text
         }),
         quotes: section.content.quotes.map((quote, index) => improveQuote(quote, goal, index))
       });
     case "Pricing":
       return sectionWithStyle(section, sectionStyles, {
-        title: textWithStyle(section.content.title, "Simple options for the next step"),
+        title: textWithStyle(section.content.title, "Einfache Optionen fuer den naechsten Schritt"),
         plans: section.content.plans.map((plan, index) => improveLineCard(plan, goal, index))
       });
     case "FAQ":
       return sectionWithStyle(section, sectionStyles, {
-        title: textWithStyle(section.content.title, "Questions answered clearly"),
+        title: textWithStyle(section.content.title, "Fragen klar beantwortet"),
         items: section.content.items.map((item, index) => improveFaq(item, goal, index))
       });
     case "CTA":
@@ -214,10 +214,10 @@ function improveSection(section, options, tonePreset) {
           padding: tonePreset.sectionPadding
         },
         {
-          title: textWithStyle(section.content.title, "Ready for a clearer next step?", {
+          title: textWithStyle(section.content.title, "Bereit fuer einen klareren naechsten Schritt?", {
             color: "#ffffff"
           }),
-          text: textWithStyle(section.content.text, "Turn interest into action with a message that is easier to trust.", {
+          text: textWithStyle(section.content.text, "Verwandle Interesse in Handlung mit einer Botschaft, der man leichter vertraut.", {
             color: "#dbe3ee"
           }),
           button: textWithStyle(section.content.button, action, {

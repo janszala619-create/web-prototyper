@@ -13,7 +13,7 @@ export const tonePresets = {
     buttonRadius: 8,
     sectionPadding: 72,
     heroFontSize: 54,
-    copyStyle: "clear, confident and spacious"
+    copyStyle: "klar, selbstbewusst und grosszuegig"
   },
   Professional: {
     primary: "#1f4e79",
@@ -27,7 +27,7 @@ export const tonePresets = {
     buttonRadius: 6,
     sectionPadding: 64,
     heroFontSize: 50,
-    copyStyle: "calm, specific and trustworthy"
+    copyStyle: "ruhig, konkret und vertrauenswuerdig"
   },
   Friendly: {
     primary: "#0f8f70",
@@ -41,7 +41,7 @@ export const tonePresets = {
     buttonRadius: 12,
     sectionPadding: 68,
     heroFontSize: 50,
-    copyStyle: "warm, direct and approachable"
+    copyStyle: "warm, direkt und nahbar"
   },
   Luxury: {
     primary: "#b68b2d",
@@ -55,7 +55,7 @@ export const tonePresets = {
     buttonRadius: 2,
     sectionPadding: 82,
     heroFontSize: 56,
-    copyStyle: "premium, restrained and elegant"
+    copyStyle: "hochwertig, reduziert und elegant"
   },
   Startup: {
     primary: "#6d5dfc",
@@ -69,7 +69,7 @@ export const tonePresets = {
     buttonRadius: 999,
     sectionPadding: 78,
     heroFontSize: 56,
-    copyStyle: "bold, fast-moving and action oriented"
+    copyStyle: "mutig, dynamisch und handlungsorientiert"
   }
 };
 

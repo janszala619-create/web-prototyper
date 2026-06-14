@@ -42,7 +42,7 @@ function parseJsonResponse(text) {
   const trimmedText = String(text ?? "").trim();
 
   if (!trimmedText) {
-    throw new Error("Empty AI response.");
+    throw new Error("Leere KI-Antwort.");
   }
 
   try {
@@ -52,7 +52,7 @@ function parseJsonResponse(text) {
     const jsonEnd = trimmedText.lastIndexOf("}");
 
     if (jsonStart === -1 || jsonEnd === -1 || jsonEnd <= jsonStart) {
-      throw new Error("AI response did not contain JSON.");
+      throw new Error("KI-Antwort enthielt kein JSON.");
     }
 
     return JSON.parse(trimmedText.slice(jsonStart, jsonEnd + 1));
@@ -63,8 +63,8 @@ function validateInput(body) {
   return {
     businessName: cleanString(body.businessName, "Northstar", 120),
     industry: cleanOption(body.industry, allowedIndustries, "Other"),
-    audience: cleanString(body.audience, "Customers", 160),
-    description: cleanString(body.description, "a focused product or service"),
+    audience: cleanString(body.audience, "Kunden", 160),
+    description: cleanString(body.description, "ein fokussiertes Produkt oder Angebot"),
     tone: cleanOption(body.tone, allowedTones, "Modern"),
     mainGoal: cleanOption(body.mainGoal, allowedGoals, "Get leads")
   };
@@ -72,11 +72,11 @@ function validateInput(body) {
 
 function validateOutput(value) {
   if (!value || typeof value !== "object") {
-    throw new Error("AI response was not an object.");
+    throw new Error("KI-Antwort war kein Objekt.");
   }
 
   if (!Array.isArray(value.sections) || value.sections.length === 0) {
-    throw new Error("AI response did not include sections.");
+    throw new Error("KI-Antwort enthielt keine Sections.");
   }
 
   return {
@@ -89,29 +89,29 @@ function validateOutput(value) {
 
 function getSafeOpenAiError(error) {
   if (error?.status === 401) {
-    return "OpenAI API key is invalid or missing access.";
+    return "OpenAI API-Key ist ungueltig oder hat keinen Zugriff.";
   }
 
   if (error?.status === 429) {
-    return "OpenAI rate limit or quota reached.";
+    return "OpenAI Rate Limit oder Kontingent erreicht.";
   }
 
   if (error?.status === 400) {
-    return "OpenAI rejected the request format.";
+    return "OpenAI hat das Anfrageformat abgelehnt.";
   }
 
-  return "Could not generate website.";
+  return "Website konnte nicht generiert werden.";
 }
 
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
-    sendJson(response, 405, { error: "Method not allowed. Use POST." });
+    sendJson(response, 405, { error: "Methode nicht erlaubt. Bitte POST verwenden." });
     return;
   }
 
   if (!process.env.OPENAI_API_KEY) {
-    sendJson(response, 500, { error: "OpenAI API key is not configured." });
+    sendJson(response, 500, { error: "OpenAI API-Key ist nicht konfiguriert." });
     return;
   }
 
@@ -140,7 +140,7 @@ export default async function handler(request, response) {
 
       sendJson(response, 200, parsed);
     } catch {
-      sendJson(response, 502, { error: "OpenAI returned invalid JSON." });
+      sendJson(response, 502, { error: "OpenAI hat kein gueltiges JSON geliefert." });
     }
   } catch (error) {
     sendJson(response, 500, { error: getSafeOpenAiError(error) });

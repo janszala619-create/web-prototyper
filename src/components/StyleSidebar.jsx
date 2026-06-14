@@ -94,7 +94,7 @@ function StyleSidebar({ element, hasSections, onChange }) {
               <img
                 className="image-preview"
                 src={element.image.src}
-                alt={element.image.alt || "Uploaded preview"}
+                alt={element.image.alt || "Bildvorschau"}
               />
               <label className="field">
                 Alt-Text
@@ -152,14 +152,14 @@ function StyleSidebar({ element, hasSections, onChange }) {
         onChange={(value) => updateStyle("margin", value)}
       />
       <RangeField
-        label="Border-Radius"
+        label="Eckenradius"
         min="0"
         max="48"
         value={element.styles.borderRadius}
         onChange={(value) => updateStyle("borderRadius", value)}
       />
       <RangeField
-        label="Font-Size"
+        label="Schriftgroesse"
         min="10"
         max="72"
         value={element.styles.fontSize}

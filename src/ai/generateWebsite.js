@@ -94,27 +94,37 @@ function buildDesignSystem(tone, industry, preset) {
 }
 
 function buildHeadline(industry, businessName, audience, description, mainGoal) {
-  if (industry === "SaaS" && description.toLowerCase().includes("bookkeeping")) {
-    return `Automate Your ${audience.replace(/s$/, "")} Accounting`;
+  const normalizedDescription = description.toLowerCase();
+
+  if (
+    industry === "SaaS" &&
+    (normalizedDescription.includes("bookkeeping") || normalizedDescription.includes("buchhaltung"))
+  ) {
+    return `Automatisiere deine Buchhaltung fuer ${audience}`;
   }
 
   if (mainGoal === "Showcase work") {
-    return `${businessName} Work That Speaks Clearly`;
+    return `${businessName}: Arbeiten, die klar fuer sich sprechen`;
   }
 
   if (mainGoal === "Book appointments") {
-    return `Book ${businessName} With Confidence`;
+    return `${businessName} mit Vertrauen buchen`;
   }
 
-  return `${businessName} for ${audience}`;
+  return `${businessName} fuer ${audience}`;
 }
 
 function buildSubheadline(industry, audience, description, tonePreset) {
-  if (industry === "SaaS" && description.toLowerCase().includes("bookkeeping")) {
-    return "Save hours every month with AI-powered bookkeeping.";
+  const normalizedDescription = description.toLowerCase();
+
+  if (
+    industry === "SaaS" &&
+    (normalizedDescription.includes("bookkeeping") || normalizedDescription.includes("buchhaltung"))
+  ) {
+    return "Spare jeden Monat Stunden mit KI-gestuetzter Buchhaltung.";
   }
 
-  return `${titleCase(description)} for ${audience}, shaped with a ${tonePreset.copyStyle} message that makes the next step clear.`;
+  return `${titleCase(description)} fuer ${audience}, formuliert im Stil: ${tonePreset.copyStyle}. Der naechste Schritt ist sofort klar.`;
 }
 
 export function generateWebsite(input = {}) {
@@ -157,7 +167,7 @@ export function generateWebsite(input = {}) {
             color: heroTextColor,
             fontSize: 23
           }),
-          navigation: updateText(hero.content.navigation, "Features   Pricing   FAQ", {
+          navigation: updateText(hero.content.navigation, "Funktionen   Preise   FAQ", {
             color: heroSoftColor
           }),
           title: updateText(
@@ -215,7 +225,7 @@ export function generateWebsite(input = {}) {
           padding: tonePreset.sectionPadding
         },
         {
-          title: updateText(testimonials.content.title, `Trusted by ${audience}`, {
+          title: updateText(testimonials.content.title, `Vertraut von ${audience}`, {
             color: tonePreset.text
           }),
           quotes: industryPreset.testimonials.map(([name, position, quote], index) =>
@@ -242,14 +252,14 @@ export function generateWebsite(input = {}) {
           title: updateText(
             pricing.content.title,
             industry === "SaaS" || industry === "E-Commerce"
-              ? "Choose the plan that fits your next step"
-              : "Choose the package that fits your next step"
+              ? "Waehle den Plan, der zu deinem naechsten Schritt passt"
+              : "Waehle das Paket, das zu deinem naechsten Schritt passt"
           ),
           plans: industryPreset.pricing.map(([name, price, details], index) =>
             cloneElement(
               pricing.content.plans[index],
               generatedId("pricing", index),
-              `Package ${index + 1}`,
+              `Paket ${index + 1}`,
               `${name}\n${price}\n${details}`,
               {
                 backgroundColor: index === 1 ? tonePreset.hero : tonePreset.muted,
@@ -266,13 +276,13 @@ export function generateWebsite(input = {}) {
           padding: tonePreset.sectionPadding
         },
         {
-          title: updateText(faq.content.title, "Questions before you start"),
+          title: updateText(faq.content.title, "Fragen vor dem Start"),
           items: [
-            [`Is ${businessName} built for ${audience}?`, `Yes, the offer is shaped around ${audience} looking for ${description}.`],
-            ["How quickly can someone get started?", "The page makes the first step clear, simple and low-friction."],
-            ["Can this page be edited later?", "Yes, every generated block is a normal editable section in the builder."],
-            ["Does the export work offline?", "Yes, the exported HTML includes page structure and styles without editor code."],
-            ["What should visitors do next?", `The main action is clear: ${ctaText}.`]
+            [`Ist ${businessName} fuer ${audience} gemacht?`, `Ja, das Angebot ist auf ${audience} und ${description} ausgerichtet.`],
+            ["Wie schnell kann man starten?", "Die Seite macht den ersten Schritt klar, einfach und reibungsarm."],
+            ["Kann diese Seite spaeter bearbeitet werden?", "Ja, jeder generierte Block ist eine normale editierbare Section im Builder."],
+            ["Funktioniert der Export offline?", "Ja, das exportierte HTML enthaelt Struktur und Styles ohne Editor-Code."],
+            ["Was sollen Besucher als Naechstes tun?", `Die Hauptaktion ist klar: ${ctaText}.`]
           ].map(([question, answer], index) =>
             cloneElement(
               faq.content.items[index % faq.content.items.length],
@@ -294,12 +304,12 @@ export function generateWebsite(input = {}) {
           padding: tonePreset.sectionPadding
         },
         {
-          title: updateText(cta.content.title, `Ready to move forward with ${businessName}?`, {
+          title: updateText(cta.content.title, `Bereit fuer den naechsten Schritt mit ${businessName}?`, {
             color: "#ffffff"
           }),
           text: updateText(
             cta.content.text,
-            `Give ${audience} a clear reason to act today with a page built around ${description}.`,
+            `Gib ${audience} einen klaren Grund, heute zu handeln - mit einer Seite rund um ${description}.`,
             { color: "#dbe3ee" }
           ),
           button: updateText(cta.content.button, ctaText, designSystem.buttons)
@@ -314,7 +324,7 @@ export function generateWebsite(input = {}) {
         {
           text: updateText(
             footer.content.text,
-            `Copyright ${new Date().getFullYear()} ${businessName}  |  Features   Pricing   Contact`,
+            `Copyright ${new Date().getFullYear()} ${businessName}  |  Funktionen   Preise   Kontakt`,
             {
               color: "#ffffff"
             }

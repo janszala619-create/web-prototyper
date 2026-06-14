@@ -19,169 +19,169 @@ export const industryPresets = {
   SaaS: {
     template: "saas",
     defaultName: "InvoiceFlow",
-    defaultAudience: "Freelancers",
-    defaultDescription: "AI bookkeeping software",
+    defaultAudience: "Freelancer",
+    defaultDescription: "KI-Buchhaltungssoftware",
     cta: {
-      "Get leads": "Start Free Trial",
-      "Sell product": "Start Free Trial",
-      "Book appointments": "Book a Demo",
-      "Build trust": "See How It Works",
-      "Showcase work": "Explore Features"
+      "Get leads": "Kostenlos testen",
+      "Sell product": "Kostenlos testen",
+      "Book appointments": "Demo buchen",
+      "Build trust": "So funktioniert es",
+      "Showcase work": "Funktionen ansehen"
     },
     features: [
-      ["Automated Workflows", "Remove repetitive admin work and focus on higher-value decisions."],
-      ["Shared Dashboard", "Keep tasks, metrics and next steps visible in one focused workspace."],
-      ["Fast Onboarding", "Launch with guided setup, useful defaults and simple team adoption."]
+      ["Automatisierte Workflows", "Reduziere wiederkehrende Verwaltungsarbeit und konzentriere dich auf wichtigere Entscheidungen."],
+      ["Gemeinsames Dashboard", "Halte Aufgaben, Kennzahlen und naechste Schritte in einem fokussierten Arbeitsbereich sichtbar."],
+      ["Schnelles Onboarding", "Starte mit gefuehrter Einrichtung, sinnvollen Defaults und einfacher Einfuehrung."]
     ],
     testimonials: [
-      ["Maya Chen", "Founder", "The product made our workflow clearer in the first week."],
-      ["Jonas Weber", "Operations Lead", "We finally had one place for decisions, follow-up and reporting."],
-      ["Amara Brooks", "Finance Consultant", "The setup felt simple, but the outcome felt serious."]
+      ["Maya Chen", "Gruenderin", "Das Produkt hat unseren Workflow schon in der ersten Woche klarer gemacht."],
+      ["Jonas Weber", "Operations Lead", "Endlich hatten wir einen Ort fuer Entscheidungen, Follow-ups und Reporting."],
+      ["Amara Brooks", "Finanzberaterin", "Die Einrichtung war einfach, das Ergebnis wirkte trotzdem sehr professionell."]
     ],
     pricing: [
-      ["Starter", "19 EUR / Monat", "Core features\nBasic support\nSolo workflows"],
-      ["Professional", "59 EUR / Monat", "Advanced workflows\nTeam seats\nPriority support"],
-      ["Enterprise", "Custom", "Custom onboarding\nSecurity review\nDedicated success"]
+      ["Starter", "19 EUR / Monat", "Kernfunktionen\nBasis-Support\nSolo-Workflows"],
+      ["Professional", "59 EUR / Monat", "Erweiterte Workflows\nTeam-Sitze\nPriorisierter Support"],
+      ["Enterprise", "Individuell", "Individuelles Onboarding\nSecurity Review\nDedizierter Erfolgssupport"]
     ]
   },
   Agency: {
     template: "agency",
     defaultName: "Signalhaus",
-    defaultAudience: "Growth teams",
-    defaultDescription: "campaign strategy and conversion landing pages",
+    defaultAudience: "Growth-Teams",
+    defaultDescription: "Kampagnenstrategie und Conversion-Landingpages",
     cta: {
-      "Get leads": "Request a Proposal",
-      "Sell product": "Plan a Launch",
-      "Book appointments": "Book a Strategy Call",
-      "Build trust": "View Case Studies",
-      "Showcase work": "See Our Work"
+      "Get leads": "Angebot anfragen",
+      "Sell product": "Launch planen",
+      "Book appointments": "Strategiegespraech buchen",
+      "Build trust": "Case Studies ansehen",
+      "Showcase work": "Arbeiten ansehen"
     },
     features: [
-      ["Sharper Positioning", "Turn strategy, messaging and creative direction into a page that converts."],
-      ["Campaign Systems", "Connect landing pages, offers and testing loops for repeatable launches."],
-      ["Performance Review", "See what is working and improve each campaign with clearer decisions."]
+      ["Schaerfere Positionierung", "Verwandle Strategie, Messaging und Kreativrichtung in eine Seite, die konvertiert."],
+      ["Kampagnensysteme", "Verbinde Landingpages, Angebote und Testschleifen fuer wiederholbare Launches."],
+      ["Performance Review", "Erkenne, was funktioniert, und verbessere jede Kampagne mit klareren Entscheidungen."]
     ],
     testimonials: [
-      ["Nora Singh", "CMO", "The team turned a fuzzy campaign into a focused offer."],
-      ["Leo Martin", "Growth Lead", "Every section had a job, and conversion improved quickly."],
-      ["Elena Park", "Founder", "It felt strategic, fast and unusually easy to act on."]
+      ["Nora Singh", "CMO", "Das Team hat aus einer unscharfen Kampagne ein klares Angebot gemacht."],
+      ["Leo Martin", "Growth Lead", "Jede Section hatte eine Aufgabe, und die Conversion stieg schnell."],
+      ["Elena Park", "Gruenderin", "Es fuehlte sich strategisch, schnell und ungewoehnlich umsetzbar an."]
     ],
     pricing: [
-      ["Starter", "Audit", "Landing page review\nMessaging notes\nQuick wins"],
-      ["Professional", "Launch Sprint", "Offer strategy\nLanding page system\nExperiment plan"],
-      ["Enterprise", "Growth Partner", "Campaign roadmap\nCreative operations\nDedicated strategy"]
+      ["Starter", "Audit", "Landingpage-Review\nMessaging-Notizen\nQuick Wins"],
+      ["Professional", "Launch Sprint", "Angebotsstrategie\nLandingpage-System\nExperimentplan"],
+      ["Enterprise", "Growth Partner", "Kampagnen-Roadmap\nCreative Operations\nDedizierte Strategie"]
     ]
   },
   "E-Commerce": {
     template: "saas",
     defaultName: "Northline Goods",
-    defaultAudience: "Online shoppers",
-    defaultDescription: "curated products for everyday routines",
+    defaultAudience: "Online-Kaeufer",
+    defaultDescription: "kuratierte Produkte fuer den Alltag",
     cta: {
-      "Get leads": "Join the List",
-      "Sell product": "Shop the Collection",
-      "Book appointments": "Book a Styling Call",
-      "Build trust": "Read Reviews",
-      "Showcase work": "Explore Products"
+      "Get leads": "In die Liste eintragen",
+      "Sell product": "Kollektion ansehen",
+      "Book appointments": "Beratung buchen",
+      "Build trust": "Bewertungen lesen",
+      "Showcase work": "Produkte entdecken"
     },
     features: [
-      ["Curated Products", "Present bestsellers, bundles and seasonal offers in a clear buying journey."],
-      ["Smooth Buying Flow", "Guide shoppers from discovery to decision with fewer distractions."],
-      ["Retention Hooks", "Use offers, reviews and reminders to bring customers back."]
+      ["Kuratierte Produkte", "Praesentiere Bestseller, Bundles und saisonale Angebote in einer klaren Kaufstrecke."],
+      ["Reibungsloser Kaufprozess", "Fuehre Kaeufer mit weniger Ablenkung von Entdeckung zu Entscheidung."],
+      ["Bindungsimpulse", "Nutze Angebote, Bewertungen und Erinnerungen, um Kunden zurueckzubringen."]
     ],
     testimonials: [
-      ["Mila Torres", "Customer", "The collection made it easy to find exactly what I needed."],
-      ["Sam Carter", "Store Owner", "Our offer finally felt clear enough to buy from."],
-      ["Iris Novak", "Brand Manager", "The product story became sharper and more trustworthy."]
+      ["Mila Torres", "Kundin", "Die Kollektion machte es leicht, genau das Richtige zu finden."],
+      ["Sam Carter", "Shop-Inhaber", "Unser Angebot war endlich klar genug, um direkt zu kaufen."],
+      ["Iris Novak", "Brand Managerin", "Die Produktstory wurde schaerfer und vertrauenswuerdiger."]
     ],
     pricing: [
-      ["Starter", "29 EUR", "Core products\nBasic support\nMonthly campaigns"],
-      ["Professional", "79 EUR", "Product bundles\nAutomation flows\nPriority support"],
-      ["Enterprise", "Custom", "Multi-store rollout\nCustom integrations\nDedicated success"]
+      ["Starter", "29 EUR", "Kernprodukte\nBasis-Support\nMonatliche Kampagnen"],
+      ["Professional", "79 EUR", "Produkt-Bundles\nAutomationsstrecken\nPriorisierter Support"],
+      ["Enterprise", "Individuell", "Multi-Store-Rollout\nIndividuelle Integrationen\nDedizierter Erfolgssupport"]
     ]
   },
   Portfolio: {
     template: "portfolio",
     defaultName: "Mira Studio",
-    defaultAudience: "Creative clients",
-    defaultDescription: "brand identity and editorial design",
+    defaultAudience: "Kreativkunden",
+    defaultDescription: "Brand Identity und Editorial Design",
     cta: {
-      "Get leads": "Start a Project",
-      "Sell product": "Request a Quote",
-      "Book appointments": "Book a Consultation",
-      "Build trust": "Read Client Notes",
-      "Showcase work": "View Work"
+      "Get leads": "Projekt starten",
+      "Sell product": "Angebot anfragen",
+      "Book appointments": "Beratung buchen",
+      "Build trust": "Kundenstimmen lesen",
+      "Showcase work": "Arbeiten ansehen"
     },
     features: [
-      ["Signature Work", "Showcase projects with clear context, outcomes and a memorable point of view."],
-      ["Simple Contact Flow", "Make it easy for potential clients to understand fit and start a conversation."],
-      ["Credible Proof", "Pair selected work with testimonials, process notes and measurable results."]
+      ["Praegende Arbeiten", "Zeige Projekte mit klarem Kontext, Ergebnissen und einer einpraegsamen Haltung."],
+      ["Einfacher Kontakt", "Mache es potenziellen Kunden leicht, den Fit zu verstehen und ein Gespraech zu starten."],
+      ["Glaubwuerdiger Beweis", "Kombiniere ausgewaehlte Arbeiten mit Stimmen, Prozessnotizen und Ergebnissen."]
     ],
     testimonials: [
-      ["Clara Weiss", "Creative Director", "The work felt considered, useful and beautifully restrained."],
-      ["Owen Hale", "Startup Founder", "Our brand finally had a system we could build with."],
-      ["Priya Shah", "Editorial Lead", "The process was clear, calm and very sharp."]
+      ["Clara Weiss", "Creative Director", "Die Arbeit wirkte durchdacht, nuetzlich und schoen reduziert."],
+      ["Owen Hale", "Startup-Gruender", "Unsere Marke hatte endlich ein System, auf dem wir aufbauen konnten."],
+      ["Priya Shah", "Editorial Lead", "Der Prozess war klar, ruhig und sehr praezise."]
     ],
     pricing: [
-      ["Starter", "Identity Audit", "Brand review\nVisual direction\nNext-step roadmap"],
-      ["Professional", "Brand System", "Core identity\nDesign assets\nLaunch support"],
-      ["Enterprise", "Creative Partner", "Campaign design\nEditorial systems\nOngoing direction"]
+      ["Starter", "Identity Audit", "Markenreview\nVisuelle Richtung\nRoadmap fuer naechste Schritte"],
+      ["Professional", "Brand System", "Kernidentitaet\nDesign-Assets\nLaunch-Support"],
+      ["Enterprise", "Creative Partner", "Kampagnendesign\nEditorial Systeme\nLaufende Begleitung"]
     ]
   },
   Restaurant: {
     template: "saas",
     defaultName: "Table & Thyme",
-    defaultAudience: "Local guests",
-    defaultDescription: "seasonal dining and private events",
+    defaultAudience: "lokale Gaeste",
+    defaultDescription: "saisonale Kueche und private Events",
     cta: {
-      "Get leads": "Join the Guest List",
-      "Sell product": "Order a Gift Card",
-      "Book appointments": "Reserve a Table",
-      "Build trust": "Read Guest Stories",
-      "Showcase work": "View Menu"
+      "Get leads": "Gaesteliste beitreten",
+      "Sell product": "Gutschein bestellen",
+      "Book appointments": "Tisch reservieren",
+      "Build trust": "Gaestestimmen lesen",
+      "Showcase work": "Menue ansehen"
     },
     features: [
-      ["Menu Highlights", "Feature signature dishes, seasonal specials and clear reasons to visit."],
-      ["Reservations", "Guide guests from appetite to booking with a direct call to action."],
-      ["Local Atmosphere", "Communicate the experience, hospitality and story behind the table."]
+      ["Menue-Highlights", "Zeige Signature Dishes, saisonale Specials und klare Gruende fuer einen Besuch."],
+      ["Reservierungen", "Fuehre Gaeste vom Appetit zur Buchung mit einem direkten Call-to-Action."],
+      ["Lokale Atmosphaere", "Vermittle Erlebnis, Gastfreundschaft und die Geschichte hinter dem Tisch."]
     ],
     testimonials: [
-      ["Anna Keller", "Local Guest", "The meal felt warm, memorable and beautifully paced."],
-      ["Marco Lane", "Event Planner", "Private dining was easy to arrange and wonderful to host."],
-      ["Sofia Brandt", "Food Writer", "A thoughtful menu with a clear sense of place."]
+      ["Anna Keller", "Stammgast", "Das Essen war warm, besonders und wunderbar abgestimmt."],
+      ["Marco Lane", "Eventplaner", "Private Dining war einfach zu planen und grossartig umzusetzen."],
+      ["Sofia Brandt", "Food Writer", "Ein durchdachtes Menue mit klarem Gefuehl fuer den Ort."]
     ],
     pricing: [
-      ["Starter", "Lunch", "Seasonal menu\nLocal ingredients\nReservation link"],
-      ["Professional", "Dinner", "Signature menu\nPrivate events\nPriority guest support"],
-      ["Enterprise", "Events", "Catering\nGroup bookings\nDedicated planning"]
+      ["Starter", "Lunch", "Saisonales Menue\nLokale Zutaten\nReservierungslink"],
+      ["Professional", "Dinner", "Signature Menue\nPrivate Events\nPriorisierter Gaestesupport"],
+      ["Enterprise", "Events", "Catering\nGruppenbuchungen\nDedizierte Planung"]
     ]
   },
   Other: {
     template: "saas",
     defaultName: "Northstar",
-    defaultAudience: "Customers",
-    defaultDescription: "a focused product or service",
+    defaultAudience: "Kunden",
+    defaultDescription: "ein fokussiertes Produkt oder Angebot",
     cta: {
-      "Get leads": "Get Started",
-      "Sell product": "Buy Now",
-      "Book appointments": "Book a Call",
-      "Build trust": "Learn More",
-      "Showcase work": "Explore"
+      "Get leads": "Loslegen",
+      "Sell product": "Jetzt kaufen",
+      "Book appointments": "Gespraech buchen",
+      "Build trust": "Mehr erfahren",
+      "Showcase work": "Entdecken"
     },
     features: [
-      ["Clear Value", "Explain what makes the offer useful, credible and easy to choose."],
-      ["Simple Path", "Guide visitors from first impression to the next clear step."],
-      ["Proof Points", "Use outcomes, examples and FAQs to reduce hesitation."]
+      ["Klarer Nutzen", "Erklaere, was das Angebot nuetzlich, glaubwuerdig und leicht waehlbar macht."],
+      ["Einfacher Weg", "Fuehre Besucher vom ersten Eindruck zum naechsten klaren Schritt."],
+      ["Vertrauensbeweise", "Nutze Ergebnisse, Beispiele und FAQs, um Zweifel zu reduzieren."]
     ],
     testimonials: [
-      ["Maya Chen", "Customer", "The offer felt clear and easy to act on."],
-      ["Jonas Weber", "Team Lead", "We understood the value in seconds."],
-      ["Amara Brooks", "Founder", "The page made the next step obvious."]
+      ["Maya Chen", "Kundin", "Das Angebot war klar und leicht umzusetzen."],
+      ["Jonas Weber", "Team Lead", "Wir haben den Nutzen in Sekunden verstanden."],
+      ["Amara Brooks", "Gruenderin", "Die Seite machte den naechsten Schritt sofort klar."]
     ],
     pricing: [
-      ["Starter", "From 19 EUR", "Core offer\nBasic support\nFast setup"],
-      ["Professional", "From 59 EUR", "Expanded offer\nPriority support\nTeam workflows"],
-      ["Enterprise", "Custom", "Tailored setup\nDedicated support\nAdvanced needs"]
+      ["Starter", "Ab 19 EUR", "Kernangebot\nBasis-Support\nSchnelle Einrichtung"],
+      ["Professional", "Ab 59 EUR", "Erweitertes Angebot\nPriorisierter Support\nTeam-Workflows"],
+      ["Enterprise", "Individuell", "Massgeschneiderte Einrichtung\nDedizierter Support\nErweiterte Anforderungen"]
     ]
   }
 };
@@ -193,5 +193,5 @@ export function getIndustryPreset(industry) {
 export function getGoalCta(industry, mainGoal) {
   const preset = getIndustryPreset(industry);
 
-  return preset.cta[mainGoal] ?? preset.cta["Get leads"] ?? "Get Started";
+  return preset.cta[mainGoal] ?? preset.cta["Get leads"] ?? "Loslegen";
 }
