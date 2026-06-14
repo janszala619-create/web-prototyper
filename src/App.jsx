@@ -524,7 +524,12 @@ function App() {
           : getFirstEditableId(improvedWebsite.sections)
       }));
       setIsImproveOpen(false);
-      showToast(`AI improvements applied: ${improvedWebsite.designSystemSuggestions.improvementGoal}`);
+      showToast(
+        improvedWebsite.designSystemSuggestions?.aiFallbackUsed
+          ? "Website lokal verbessert, weil die AI-Antwort nicht nutzbar war."
+          : `AI improvements applied: ${improvedWebsite.designSystemSuggestions.improvementGoal}`,
+        improvedWebsite.designSystemSuggestions?.aiFallbackUsed ? "error" : "success"
+      );
     } catch (error) {
       showToast(error.message || "AI improvement failed.", "error");
     } finally {
