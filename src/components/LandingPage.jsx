@@ -17,6 +17,8 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import EditableElement from "./EditableElement.jsx";
+import { normalizeSectionsForEditor } from "../ai/sectionNormalizer.js";
+import { cloneSections, initialSections } from "../data/initialElements.js";
 import { styleFromElement } from "../utils/style.js";
 
 function splitLines(text) {
@@ -59,6 +61,7 @@ function LandingPage({
   onMoveSection,
   onReorderSections
 }) {
+  const renderableSections = getRenderableSections(sections);
   const [activeDragId, setActiveDragId] = useState(null);
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -76,9 +79,9 @@ function LandingPage({
       coordinateGetter: sortableKeyboardCoordinates
     })
   );
-  const activeDragSection = sections.find((section) => section.id === activeDragId);
+  const activeDragSection = renderableSections.find((section) => section.id === activeDragId);
 
-  if (!sections.length) {
+  if (!renderableSections.length) {
     return (
       <div className="landing-canvas empty-canvas">
         <div className="empty-state">
@@ -101,10 +104,13 @@ function LandingPage({
   }
 
   function editableText(element, props = {}) {
+    const { key, ...elementProps } = props;
+
     return (
       <EditableElement
+        key={key}
         {...selectionProps(element)}
-        {...props}
+        {...elementProps}
         onTextChange={(text) => onUpdateElement(element.id, { text })}
       />
     );
@@ -268,17 +274,17 @@ function LandingPage({
       }}
     >
       <SortableContext
-        items={sections.map((section) => section.id)}
+        items={renderableSections.map((section) => section.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="landing-canvas" onClick={() => onSelect(sections[0]?.id ?? "")}>
-          {sections.map((section, index) => (
+        <div className="landing-canvas" onClick={() => onSelect(renderableSections[0]?.id ?? "")}>
+          {renderableSections.map((section, index) => (
             <SortableSectionFrame
               key={section.id}
               index={index}
               isSelected={containsElementId(section, selectedId)}
               section={section}
-              sectionCount={sections.length}
+              sectionCount={renderableSections.length}
               selectionProps={selectionProps}
               onDuplicateSection={onDuplicateSection}
               onDeleteSection={onDeleteSection}
@@ -296,6 +302,10 @@ function LandingPage({
       </DragOverlay>
     </DndContext>
   );
+}
+
+function getRenderableSections(sections) {
+  return normalizeSectionsForEditor(sections, cloneSections(initialSections));
 }
 
 function SortableSectionFrame({

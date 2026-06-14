@@ -1,6 +1,7 @@
 const sectionTypes = ["Hero", "Features", "Testimonials", "Pricing", "FAQ", "CTA", "Footer"];
 const numericStyleKeys = ["padding", "margin", "borderRadius", "fontSize"];
 const stringStyleKeys = ["color", "backgroundColor"];
+const colorPattern = /^#[0-9a-f]{6}$/i;
 
 function isPlainObject(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
@@ -11,7 +12,21 @@ function cleanText(value, fallback) {
 }
 
 function joinParts(parts) {
-  return parts.filter((part) => typeof part === "string" && part.trim()).join("\n");
+  return parts
+    .flatMap((part) => (Array.isArray(part) ? part : [part]))
+    .map((part) => {
+      if (typeof part === "string") {
+        return part;
+      }
+
+      if (isPlainObject(part)) {
+        return part.label ?? part.text ?? part.title ?? part.name ?? "";
+      }
+
+      return "";
+    })
+    .filter((part) => part.trim())
+    .join("\n");
 }
 
 function textFromValue(value, fallback) {
@@ -42,7 +57,7 @@ function cleanNumber(value, fallback) {
     const parsed = Number.parseFloat(value);
 
     if (Number.isFinite(parsed)) {
-      return parsed;
+      return Math.max(0, parsed);
     }
   }
 
@@ -54,7 +69,7 @@ function cleanStyleValue(key, value, fallback) {
     return cleanNumber(value, fallback);
   }
 
-  if (stringStyleKeys.includes(key) && typeof value === "string" && value.trim()) {
+  if (stringStyleKeys.includes(key) && typeof value === "string" && colorPattern.test(value.trim())) {
     return value.trim();
   }
 
@@ -63,9 +78,10 @@ function cleanStyleValue(key, value, fallback) {
 
 function mergeStyles(baseStyles = {}, aiStyles = {}) {
   const nextStyles = { ...baseStyles };
+  const incomingStyles = isPlainObject(aiStyles) ? aiStyles : {};
 
   for (const key of [...numericStyleKeys, ...stringStyleKeys]) {
-    nextStyles[key] = cleanStyleValue(key, aiStyles[key], baseStyles[key]);
+    nextStyles[key] = cleanStyleValue(key, incomingStyles[key], baseStyles[key]);
   }
 
   return nextStyles;
@@ -114,7 +130,9 @@ function mergeContent(baseValue, aiValue) {
 }
 
 function findAiSection(aiSections, type) {
-  return aiSections.find((section) => section?.type === type);
+  return aiSections.find(
+    (section) => typeof section?.type === "string" && section.type.toLowerCase() === type.toLowerCase()
+  );
 }
 
 function itemText(item, fallback) {
@@ -228,6 +246,48 @@ export function normalizeGeneratedWebsite(aiWebsite, fallbackWebsite) {
       };
     })
   };
+}
+
+export function normalizeSectionsForEditor(sections, fallbackSections) {
+  if (!Array.isArray(sections)) {
+    return fallbackSections;
+  }
+
+  if (sections.length === 0) {
+    return [];
+  }
+
+  const incomingSections = sections;
+  const normalizedSections = incomingSections
+    .filter((section) => isPlainObject(section))
+    .map((section, index) => {
+      const fallbackSection =
+        fallbackSections.find(
+          (item) =>
+            typeof section.type === "string" &&
+            typeof item.type === "string" &&
+            item.type.toLowerCase() === section.type.toLowerCase()
+        ) ??
+        fallbackSections[index] ??
+        fallbackSections[0];
+
+      if (!fallbackSection) {
+        return null;
+      }
+
+      const normalized = normalizeGeneratedWebsite(
+        { template: "", designSystem: {}, sections: [section] },
+        { template: "", designSystem: {}, sections: [fallbackSection] }
+      ).sections[0];
+
+      return {
+        ...normalized,
+        id: cleanText(section.id, normalized.id)
+      };
+    })
+    .filter(Boolean);
+
+  return normalizedSections.length ? normalizedSections : fallbackSections;
 }
 
 export function normalizeImprovedWebsite(aiWebsite, currentSections) {

@@ -153,7 +153,7 @@ export default async function handler(request, response) {
         {
           role: "system",
           content:
-            "Antworte ausschließlich mit validem JSON. Kein Markdown. Keine Erklärtexte. Nutze exakt die erwartete Struktur. Keine Scripts. Keine externen Tracking-Codes. Sections müssen mit dem bestehenden Editor kompatibel sein. Erhalte IDs und Section-Reihenfolge möglichst unverändert."
+            "Antworte ausschließlich mit validem JSON. Kein Markdown. Keine Erklärtexte. Nutze exakt die erwartete Struktur. Keine Scripts. Keine externen Tracking-Codes. Sections müssen mit dem bestehenden Editor kompatibel sein. Erhalte IDs und Section-Reihenfolge möglichst unverändert. Wenn du styles setzt, dann nur color/backgroundColor als Hex-Farben und padding/margin/borderRadius/fontSize als Zahlen. Keine CSS-Shorthands wie '80px 24px'."
         },
         {
           role: "user",

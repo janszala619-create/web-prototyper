@@ -328,7 +328,15 @@ export function generateWebsite(input = {}) {
 export function generateWebsiteWithAI(input) {
   // Server-side OpenAI call lives in /api/generate-website.
   // Never pass or store an API key in the Vite frontend.
-  return requestGeneratedWebsite(input).then((aiWebsite) =>
-    normalizeGeneratedWebsite(aiWebsite, generateWebsite(input))
-  );
+  const fallbackWebsite = generateWebsite(input);
+
+  return requestGeneratedWebsite(input)
+    .then((aiWebsite) => normalizeGeneratedWebsite(aiWebsite, fallbackWebsite))
+    .catch(() => ({
+      ...fallbackWebsite,
+      designSystem: {
+        ...fallbackWebsite.designSystem,
+        aiFallbackUsed: true
+      }
+    }));
 }

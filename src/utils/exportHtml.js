@@ -1,3 +1,6 @@
+import { normalizeSectionsForEditor } from "../ai/sectionNormalizer.js";
+import { cloneSections, initialSections } from "../data/initialElements.js";
+
 const exportCss = `:root {
   color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -236,16 +239,36 @@ button {
   }
 }`;
 
+function safeNumber(value, fallback = 0) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return Math.max(0, value);
+  }
+
+  if (typeof value === "string") {
+    const parsed = Number.parseFloat(value);
+
+    if (Number.isFinite(parsed)) {
+      return Math.max(0, parsed);
+    }
+  }
+
+  return fallback;
+}
+
+function safeColor(value, fallback) {
+  return /^#[0-9a-f]{6}$/i.test(value) ? value : fallback;
+}
+
 export function styleToInline(element) {
-  const { styles } = element;
+  const { styles = {} } = element ?? {};
 
   return [
-    `color: ${styles.color}`,
-    `background-color: ${styles.backgroundColor}`,
-    `padding: ${Number(styles.padding) || 0}px`,
-    `margin: ${Number(styles.margin) || 0}px`,
-    `border-radius: ${Number(styles.borderRadius) || 0}px`,
-    `font-size: ${Number(styles.fontSize) || 0}px`
+    `color: ${safeColor(styles.color, "#172033")}`,
+    `background-color: ${safeColor(styles.backgroundColor, "transparent")}`,
+    `padding: ${safeNumber(styles.padding)}px`,
+    `margin: ${safeNumber(styles.margin)}px`,
+    `border-radius: ${safeNumber(styles.borderRadius)}px`,
+    `font-size: ${safeNumber(styles.fontSize, 16)}px`
   ].join("; ");
 }
 
@@ -258,11 +281,19 @@ function escapeHtml(value) {
 }
 
 function textMarkup(element, tag, className) {
-  return `<${tag} class="${className}" style="${styleToInline(element)}">${escapeHtml(element.text)}</${tag}>`;
+  if (!element) {
+    return "";
+  }
+
+  return `<${tag} class="${className}" style="${styleToInline(element)}">${escapeHtml(element.text ?? "")}</${tag}>`;
 }
 
 function cardMarkup(element, className) {
-  const [title, ...body] = element.text.split("\n");
+  if (!element) {
+    return "";
+  }
+
+  const [title, ...body] = String(element.text ?? "").split("\n");
 
   return `<article class="${className}" style="${styleToInline(element)}">
       <strong>${escapeHtml(title)}</strong>
@@ -298,14 +329,18 @@ function renderHero(section) {
 }
 
 function renderSectionBody(section) {
-  const { content } = section;
+  const { content = {} } = section;
 
   switch (section.type) {
     case "Hero":
+      if (!content.logo || !content.navigation || !content.title || !content.text || !content.button || !content.visual) {
+        return "";
+      }
+
       return renderHero(section);
     case "Features":
       return `<div class="card-grid">
-    ${content.cards.map((item) => cardMarkup(item, "feature-card")).join("\n    ")}
+    ${(content.cards ?? []).map((item) => cardMarkup(item, "feature-card")).join("\n    ")}
   </div>`;
     case "CTA":
       return `<div class="center-stack">
@@ -316,17 +351,17 @@ function renderSectionBody(section) {
     case "Testimonials":
       return `${textMarkup(content.title, "h2", "section-title")}
   <div class="card-grid two-up">
-    ${content.quotes.map((item) => textMarkup(item, "blockquote", "quote-card")).join("\n    ")}
+    ${(content.quotes ?? []).map((item) => textMarkup(item, "blockquote", "quote-card")).join("\n    ")}
   </div>`;
     case "Pricing":
       return `${textMarkup(content.title, "h2", "section-title")}
   <div class="card-grid">
-    ${content.plans.map((item) => cardMarkup(item, "pricing-card")).join("\n    ")}
+    ${(content.plans ?? []).map((item) => cardMarkup(item, "pricing-card")).join("\n    ")}
   </div>`;
     case "FAQ":
       return `${textMarkup(content.title, "h2", "section-title")}
   <div class="faq-list">
-    ${content.items.map((item) => cardMarkup(item, "faq-item")).join("\n    ")}
+    ${(content.items ?? []).map((item) => cardMarkup(item, "faq-item")).join("\n    ")}
   </div>`;
     case "Contact":
       return `<div class="contact-grid">
@@ -347,12 +382,14 @@ function renderSectionBody(section) {
 }
 
 export function createLandingMarkup(sections) {
-  if (!sections.length) {
+  const normalizedSections = normalizeSectionsForEditor(sections, cloneSections(initialSections));
+
+  if (!normalizedSections.length) {
     return `<main class="landing-canvas"></main>`;
   }
 
   return `<main class="landing-canvas">
-  ${sections
+  ${normalizedSections
     .map(
       (section) => `<section class="page-section section-${section.type.toLowerCase()}" style="${styleToInline(section)}">
   ${renderSectionBody(section)}

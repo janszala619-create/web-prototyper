@@ -5,13 +5,12 @@ import ExportButton from "./components/ExportButton.jsx";
 import { generateWebsiteWithAI } from "./ai/generateWebsite.js";
 import { improveWebsiteWithAI, improvementGoalOptions } from "./ai/improveWebsite.js";
 import { industryOptions, mainGoalOptions } from "./ai/industryPresets.js";
-import { normalizeGeneratedWebsite } from "./ai/sectionNormalizer.js";
+import { normalizeSectionsForEditor } from "./ai/sectionNormalizer.js";
 import { toneOptions } from "./ai/tonePresets.js";
 import {
   cloneSections,
   createSection,
   duplicateSection,
-  initialSections,
   landingTemplates,
   legacyElementsToSections,
   sectionLibrary
@@ -115,25 +114,8 @@ function mergeSections(savedSections, templateId) {
 
 function normalizeEditorSections(sections, templateId) {
   const templateSections = getTemplateSections(templateId);
-  const normalizedSections = sections
-    .filter((section) => section && typeof section === "object")
-    .map((section) => {
-      const fallbackSection =
-        templateSections.find((item) => item.type === section.type) ??
-        initialSections.find((item) => item.type === section.type) ??
-        initialSections[0];
-      const normalized = normalizeGeneratedWebsite(
-        { template: templateId, designSystem: {}, sections: [section] },
-        { template: templateId, designSystem: {}, sections: cloneSections([fallbackSection]) }
-      ).sections[0];
 
-      return {
-        ...normalized,
-        id: typeof section.id === "string" && section.id.trim() ? section.id : normalized.id
-      };
-    });
-
-  return normalizedSections.length ? normalizedSections : cloneSections(templateSections);
+  return normalizeSectionsForEditor(sections, cloneSections(templateSections));
 }
 
 function createProjectId() {
@@ -157,7 +139,7 @@ function saveProjects(projects) {
 function editorStateFromProject(project) {
   const templateId = landingTemplates[project?.template] ? project.template : defaultTemplateId;
   const sections = Array.isArray(project?.sections)
-    ? cloneSections(project.sections)
+    ? normalizeEditorSections(project.sections, templateId)
     : cloneSections(getTemplateSections(templateId));
 
   return {
@@ -512,7 +494,12 @@ function App() {
         templateId: nextTemplateId
       }));
       setIsGeneratorOpen(false);
-      showToast(`AI website generated: ${generatedWebsite.designSystem?.industry ?? "Website"}`);
+      showToast(
+        generatedWebsite.designSystem?.aiFallbackUsed
+          ? "Website lokal generiert, weil die AI-Antwort nicht nutzbar war."
+          : `AI website generated: ${generatedWebsite.designSystem?.industry ?? "Website"}`,
+        generatedWebsite.designSystem?.aiFallbackUsed ? "error" : "success"
+      );
     } catch (error) {
       showToast(error.message || "AI website generation failed.", "error");
     } finally {

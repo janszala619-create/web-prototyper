@@ -124,11 +124,11 @@ export default async function handler(request, response) {
         {
           role: "system",
           content:
-            "Antworte ausschließlich mit validem JSON. Kein Markdown. Keine Erklärtexte. Nutze exakt die erwartete Struktur. Keine Scripts. Keine externen Tracking-Codes. Sections müssen mit dem bestehenden Editor kompatibel sein."
+            "Antworte ausschließlich mit validem JSON. Kein Markdown. Keine Erklärtexte. Nutze exakt die erwartete Struktur. Keine Scripts. Keine externen Tracking-Codes. Liefere primär Inhalte. Wenn du styles setzt, dann nur color/backgroundColor als Hex-Farben und padding/margin/borderRadius/fontSize als Zahlen. Keine CSS-Shorthands wie '80px 24px'."
         },
         {
           role: "user",
-          content: `Erzeuge eine Website als JSON mit exakt diesen Top-Level-Keys: template, designSystem, sections. Nutze normale Editor-kompatible Section-Objekte mit id, type, label, tag, text, styles und content. Erzeuge Hero, Features, Testimonials, Pricing, FAQ, CTA und Footer. Input: ${JSON.stringify(input)}`
+          content: `Erzeuge Website-Inhalte als JSON mit exakt diesen Top-Level-Keys: template, designSystem, sections. Erzeuge Sections mit type Hero, Features, Testimonials, Pricing, FAQ, CTA und Footer. Nutze content-Felder wie headline/subheadline/cta/features/testimonials/plans/items; die App normalisiert sie danach in Editor-Sections. Input: ${JSON.stringify(input)}`
         }
       ],
       max_output_tokens: 3500

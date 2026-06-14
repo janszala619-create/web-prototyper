@@ -591,19 +591,20 @@ button:disabled {
 .section-controls {
   position: absolute;
   z-index: 5;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 6px;
   max-width: calc(100% - 16px);
-  opacity: 0.96;
+  opacity: 0.28;
   transition: opacity 120ms ease;
 }
 
 .section-frame:hover .section-controls,
-.section-frame:focus-within .section-controls {
+.section-frame:focus-within .section-controls,
+.section-frame.is-selected .section-controls {
   opacity: 1;
 }
 
@@ -616,7 +617,7 @@ button:disabled {
   color: #172033;
   font-size: 12px;
   font-weight: 850;
-  box-shadow: 0 8px 24px rgba(23, 32, 51, 0.12);
+  box-shadow: 0 8px 24px rgba(23, 32, 51, 0.1);
 }
 
 .section-controls button:disabled {
