@@ -275,9 +275,20 @@ export function improveWebsiteWithAI(input) {
   const fallbackWebsite = improveWebsite(input);
 
   return requestImprovedWebsite(input)
-    .then((aiWebsite) =>
-      normalizeImprovedWebsite(aiWebsite, Array.isArray(input?.sections) ? input.sections : [])
-    )
+    .then((aiWebsite) => {
+      const normalizedWebsite = normalizeImprovedWebsite(
+        aiWebsite,
+        Array.isArray(input?.sections) ? input.sections : []
+      );
+
+      return {
+        ...normalizedWebsite,
+        designSystemSuggestions: {
+          ...fallbackWebsite.designSystemSuggestions,
+          ...normalizedWebsite.designSystemSuggestions
+        }
+      };
+    })
     .catch(() => ({
       ...fallbackWebsite,
       designSystemSuggestions: {

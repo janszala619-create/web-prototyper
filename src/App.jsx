@@ -527,7 +527,9 @@ function App() {
       showToast(
         improvedWebsite.designSystemSuggestions?.aiFallbackUsed
           ? "Website lokal verbessert, weil die AI-Antwort nicht nutzbar war."
-          : `AI improvements applied: ${improvedWebsite.designSystemSuggestions.improvementGoal}`,
+          : `AI improvements applied: ${
+              improvedWebsite.designSystemSuggestions?.improvementGoal ?? "Make copy clearer"
+            }`,
         improvedWebsite.designSystemSuggestions?.aiFallbackUsed ? "error" : "success"
       );
     } catch (error) {
